@@ -1,0 +1,18 @@
+### Python ###
+# Byte-compiled / optimized
+__pycache__/
+*.py[co]
+
+# Distribution / packaging
+.Python
+.env/
+
+# IDE
+.vscode/
+
+### Django ###
+*.log
+*.pid
+
+secret.txt
+

@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Prepare virtual env to be possible run django.
+#
+
+set -e
+
+BASE_DIR="$1"
+test -n "${BASE_DIR}" || BASE_DIR=$PWD
+
+ENV_DIR="${BASE_DIR}/.env"
+
+pushd "${BASE_DIR}"
+
+rm -rf "${ENV_DIR}"
+virtualenv --python=python3 "${ENV_DIR}"
+virtualenv --python=python3 --relocatable "${ENV_DIR}"
+source "${ENV_DIR}/bin/activate"
+python3 -m pip install -r requirements.txt
+popd
