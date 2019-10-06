@@ -5,16 +5,38 @@
 
 set -e
 
-BASE_DIR="$1"
-test -n "${BASE_DIR}" || BASE_DIR=$PWD
+QUIET=false
+ASK=true
+UPDATE=false
 
+function step() {
+  $QUIET && return 0
+  echo -n "STEP: $@"
+  result=0
+  $ASK && while true ; do read -p ' [Yn] ' yn
+    case $yn in
+      ""|[Yy]*) result=0 ; break ;;
+      [Nn]*) result=1 ; break ;;
+      *) echo "Please answer yes or no." ;;
+    esac
+  done
+  return $result
+}
+
+BASE_DIR=$PWD
 ENV_DIR="${BASE_DIR}/.env"
 
-pushd "${BASE_DIR}"
+step "Install pip and venv" &&
+  sudo apt-get install -y python3-pip python3-venv
 
-rm -rf "${ENV_DIR}"
-virtualenv --python=python3 "${ENV_DIR}"
-virtualenv --python=python3 --relocatable "${ENV_DIR}"
-source "${ENV_DIR}/bin/activate"
-python3 -m pip install -r requirements.txt
-popd
+step "Prepare project environment" && {
+  pushd "${BASE_DIR}"
+
+  rm -rf "${ENV_DIR}"
+  virtualenv --python=python3 "${ENV_DIR}"
+  virtualenv --python=python3 --relocatable "${ENV_DIR}"
+  source "${ENV_DIR}/bin/activate"
+  python3 -m pip install -r requirements.txt
+
+  popd
+}
