@@ -6,24 +6,30 @@
 2. Launch ```./deploy``` to prepare project environment.
 
 ## Run ##
-1. ```source .env/bin/activate```
-2. ```./crypto_wallet/manage.py runserver```
-3. Set up DB:
+1. Start to use the project environment:
+```
+source .env/bin/activate
+```
+2. Run Django server:
+```
+./crypto_wallet/manage.py runserver
+```
+3. Setup DB:
 ```
 ./crypto_wallet/manage.py makemigrations
 ./crypto_wallet/manage.py migrate
 ```
 
 ## Manage MongoDB ##
-1. Access:
+#### Access ####
 ```
 user = common_user
 pw = 8FUQRfAaxp7Pgbvw
 
 ```
-2. Connect to MongoDB locally:
+#### Connect to MongoDB locally ####
 ```
 mongo "mongodb+srv://blockchain-60374.gcp.mongodb.net/admin"  --username <user>
 ```
-3. Create a MongoDB:
+#### Create MongoDB database ####
 https://theholmesoffice.com/how-to-create-a-mongodb-database/
