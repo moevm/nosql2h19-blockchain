@@ -22,14 +22,12 @@ source .env/bin/activate
 
 ## Manage MongoDB ##
 #### Access ####
-```
-user = common_user
-pw = 8FUQRfAaxp7Pgbvw
+- **USER** = common_user
+- **PASSWORD** = 8FUQRfAaxp7Pgbvw
 
-```
 #### Connect to MongoDB locally ####
 ```
-mongo "mongodb+srv://blockchain-60374.gcp.mongodb.net/admin"  --username <user>
+mongo "mongodb+srv://blockchain-60374.gcp.mongodb.net/admin"  --username <USER>
 ```
 #### Create MongoDB database ####
 https://theholmesoffice.com/how-to-create-a-mongodb-database/
