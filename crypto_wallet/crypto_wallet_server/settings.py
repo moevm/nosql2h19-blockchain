@@ -79,6 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'crypto',
+        'HOST': 'mongodb+srv://common_user:8FUQRfAaxp7Pgbvw@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority',
+        'USER': 'common_user',
+        'PASSWORD': '8FUQRfAaxp7Pgbvw',
     }
 }
 
