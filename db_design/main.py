@@ -25,7 +25,7 @@ def generate_users_data():
 
 def add_new_user(user):
     init_bank_account = { "bitcoin" : 0, "dollars" : 0, "rubles" : 0}
-    user["account"] = db.accounts.insert_one(init_bank_account).inserted_id
+    user["bank_account"] = db.bank_accounts.insert_one(init_bank_account).inserted_id
     db.users.insert_one(user)
 
 def delete_user(login):
@@ -45,7 +45,7 @@ client = pymongo.MongoClient(
 
 db = client["wallet"]
 users_collection = db["users"]
-accounts_collection = db["accounts"]
+accounts_collection = db["bank_accounts"]
 
 admin = {
     "login"         : "admin",
@@ -67,7 +67,6 @@ permition_list = { "user", "admin"}
 # users_list = generate_users_data()
 # for user in users_list:
 #     add_new_user(user)
-
 
 # add_new_user(same_user)
 # delete_user("admin")
