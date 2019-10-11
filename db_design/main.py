@@ -16,9 +16,9 @@ def generate_users_data():
             {
                 "login"         : login,
                 "password"      : "".join(random.choices("qwertyuiopasdfghjklzxcvbnm1234567890", k=8)),
+                "e-mail"        : login + "@gmail.com",
                 "permission"    : "user",
-                "bank_account"  : None,
-                "e-mail"        : login + "@gmail.com"
+                "bank_account"  : None
             }
         )
     return list_users
@@ -26,16 +26,53 @@ def generate_users_data():
 def add_new_user(user):
     init_bank_account = { "bitcoin" : 0, "dollars" : 0, "rubles" : 0}
     user["bank_account"] = db.bank_accounts.insert_one(init_bank_account).inserted_id
-    db.users.insert_one(user)
+    if db.users.insert_one(user).acknowledged:
+        print("The user added successful")
+    else:
+        print("The user was not add")
 
-def delete_user(login):
+
+def delete_user_by_login(login):
     if login != "admin" :
-        db.users.find_one_and_delete({"login": login}, projection={'_id': False})
+        if db.users.find_one_and_delete({"login": login}, projection={'_id': False}) == None:
+            print("User isn't exist!")
+        else:
+            print("User deleted successful")
     else:
         print("U can't delete administrator")
 
+def login_is_exist(login):
+    if db.users.find_one({"login": login}) != None:
+        return True
+    else:
+        return False
+
+def update_user_data(login, password=None, e_mail=None):
+    user = db.users.find_one({"login": login})
+    if user == None:
+        print("Such user does not exist")
+        return
+    else:
+        user_id = user["_id"]
+    print(user, user_id)
+    if password != None and e_mail != None:
+        db.users.update_one({"_id": user_id},
+                            {"$set": {"password": password, "e-mail" : e_mail}})
+        return
+    if password != None:
+        db.users.update_one({"_id": user_id},
+                            {"$set": {"password": password}})
+        return
+    if e_mail != None:
+        db.users.update_one({"_id": user_id},
+                            {"$set": {"e-mail": e_mail}})
+        return
+
+    print("Nothing for an update!")
+
+
 def setup_collection_users():
-    db.users.create_index([("login", pymongo.ASCENDING)], unique=True)
+    db.users.create_index([("login", pymongo.ASCENDING)], unique=True) #make required fields
 
 
 # connect to db on the Atlas
@@ -68,5 +105,16 @@ permition_list = { "user", "admin"}
 # for user in users_list:
 #     add_new_user(user)
 
-# add_new_user(same_user)
-# delete_user("admin")
+test_user = {
+    "login"         : "test_user",
+    "password"      : "sdasd",
+    "permission"    : "user",
+    "bank_account"  : None,
+    "e-mail"        : "test_user@gmail.com"
+}
+
+# add_new_user(test_user)
+# delete_user_by_login("Mae_Flores")
+# login_n = "admin"
+# print("login",  login_n,  "is exist : ", login_is_exist(login_n))
+update_user_data("Crystal_Armstrong", "newpass3dasd", "fdf222@gmail.com")
