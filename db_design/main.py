@@ -72,7 +72,9 @@ def update_user_data(login, password=None, e_mail=None):
 
 
 def setup_collection_users():
-    db.users.create_index([("login", pymongo.ASCENDING)], unique=True) #make required fields
+    db.users.create_index([("login", pymongo.ASCENDING)], unique=True) 
+    # make required fields
+    # make schema
 
 
 # connect to db on the Atlas

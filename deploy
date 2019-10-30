@@ -33,10 +33,10 @@ step "Prepare project environment" && {
   pushd "${BASE_DIR}"
 
   rm -rf "${ENV_DIR}"
-  virtualenv --python=python3 "${ENV_DIR}"
-  virtualenv --python=python3 --relocatable "${ENV_DIR}"
+  virtualenv --python=python3.6 "${ENV_DIR}"
+  virtualenv --python=python3.6 --relocatable "${ENV_DIR}"
   source "${ENV_DIR}/bin/activate"
-  python3 -m pip install -r requirements.txt
+  python3.6 -m pip install -r requirements.txt
 
   popd
 }
