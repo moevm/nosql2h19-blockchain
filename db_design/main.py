@@ -42,9 +42,7 @@ test_user = {
 
 # add_new_user(test_user)
 # users_api.delete_user_by_login(db, "George_Cortez")
-# login_n = "admin"
-# print("login",  login_n,  "is exist : ", login_is_exist(login_n))
 # update_user_data("Crystal_Armstrong", "newpass3dasd", "fdf222@gmail.com")
 # bnk_api.make_remittance(db, "Maggie_Summers", "Lonnie_Bishop", "bitcoin", 6)
+# bnk_api.increase_balance(db, "Dwayne_Spencer", "dollars", 100.8)
 
-bnk_api.increase_balance(db, "Dwayne_Spencer", "dollars", 100)  
