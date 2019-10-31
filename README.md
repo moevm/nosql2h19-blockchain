@@ -25,9 +25,12 @@ source .env/bin/activate
 - USER = common_user
 - PASSWORD = 8FUQRfAaxp7Pgbvw
 
-#### Connect to MongoDB locally: ####
+#### Connect to remote MongoDB locally: ####
 ```
 mongo "mongodb+srv://blockchain-60374.gcp.mongodb.net/admin"  --username <USER>
 ```
 #### Create MongoDB database: ####
 https://theholmesoffice.com/how-to-create-a-mongodb-database/
+#### Commands ####
+- use `<db_name>`
+- show collections
