@@ -33,13 +33,30 @@ def add_new_user(user):
 
 
 def delete_user_by_login(login):
-    if login != "admin" :
-        if db.users.find_one_and_delete({"login": login}, projection={'_id': False}) == None:
-            print("User isn't exist!")
+    user = db.users.find_one({"login": login})
+    if user == None:
+        print("User isn't exist!")
+        return
+
+    if user["permission"] != "admin" :
+        user_is_deleted = db.users.delete_one({"_id": user["_id"]})
+        bank_accounts_is_deletetd = db.bank_accounts.delete_one({"_id": user["bank_account"]})
+        if user_is_deleted == None or bank_accounts_is_deletetd == None:
+            if user_is_deleted == None:
+                print("User wasn't deleted")
+            if bank_accounts_is_deletetd == None:
+                print("Bank account wasn't deleted")
         else:
             print("User deleted successful")
     else:
         print("U can't delete administrator")
+    # if login != "admin" :
+    #     if db.users.find_one_and_delete({"login": login}, projection={'_id': False}) == None:
+    #         print("User isn't exist!")
+    #     else:
+    #         print("User deleted successful")
+    # else:
+    #     print("U can't delete administrator")
 
 def login_is_exist(login):
     if db.users.find_one({"login": login}) != None:
@@ -116,7 +133,7 @@ test_user = {
 }
 
 # add_new_user(test_user)
-# delete_user_by_login("Mae_Flores")
+delete_user_by_login("Russell_Evans")
 # login_n = "admin"
 # print("login",  login_n,  "is exist : ", login_is_exist(login_n))
-update_user_data("Crystal_Armstrong", "newpass3dasd", "fdf222@gmail.com")
+# update_user_data("Crystal_Armstrong", "newpass3dasd", "fdf222@gmail.com")
