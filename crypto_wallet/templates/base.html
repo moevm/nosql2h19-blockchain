@@ -4,14 +4,15 @@
   <meta charset="utf-8">
   <title>{% block title %}Magic Crypto Wallet!{% endblock %}</title>
   {% load static %}
-  <link rel="stylesheet" href="{% static 'crypto_wallet/css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
   <main>
     {% block content %}
     {% endblock %}
   </main>
-  <div id='root'></div>
-  <script src="{% static 'crypto_wallet/js/main.js' %}"></script>
+  <div id="root"></div>
+  <script src="{% static 'js/main.js' %}"></script>
+  <img src="{% static 'img/img-test.png' %}"/>
 </body>
 </html>
