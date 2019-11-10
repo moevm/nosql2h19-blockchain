@@ -120,9 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'crypto_wallet_server/static/'
+STATIC_ROOT = 'client/public/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'crypto_wallet_server/static'),
+    os.path.join(BASE_DIR, 'client/public'),
 ]
 
 LOGIN_REDIRECT_URL = '/'
