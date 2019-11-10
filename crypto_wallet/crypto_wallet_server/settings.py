@@ -25,7 +25,7 @@ SECRET_KEY = 'e)*t(@ly=*ib_e&*j+*ujhdvp&^x1y3lotixoq%g362uiz4=rm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,15 +75,12 @@ WSGI_APPLICATION = 'crypto_wallet_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'crypto',
-        'HOST': 'mongodb+srv://common_user:8FUQRfAaxp7Pgbvw@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority',
-        'USER': 'common_user',
-        'PASSWORD': '8FUQRfAaxp7Pgbvw',
-    }
-}
+from pymongo import MongoClient
+
+client = MongoClient(
+    "mongodb+srv://common_user:8FUQRfAaxp7Pgbvw@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority"
+)
+db = client.crypto
 
 
 # Password validation
