@@ -1,15 +1,15 @@
-from django.conf.setting import DATABASE
+from .settings import DB_NAME, DB_USER, DB_PASSWORD
 from pymongo import MongoClient
 
-from crypto_wallet_server.exceptions import NoDatabaseException
-from crypto_wallet_server.extensions import UserNotFound
+from crypto_wallet_server.exceptions import NoDatabaseException, UserNotFound
+
 
 
 client = MongoClient(
-    f'mongodb+srv://{DATABASE.USER}:{DATABASE.PASSWORD}@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority'
+    f'mongodb+srv://{DB_USER}:{DB_PASSWORD}@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority'
 )
 
-db = getattr(client, DATABASE.NAME, None)
+db = getattr(client, DB_NAME, None)
 
 if db is None:
     raise NoDatabaseException()

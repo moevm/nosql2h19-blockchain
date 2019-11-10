@@ -1,5 +1,5 @@
 from rest_framework import routers
-from crypto_wallet.accounts.views import UserViewSet
+from .views import UserViewSet
 
 router = routers.DefaultRouter()
 

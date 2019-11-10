@@ -2,11 +2,9 @@ from rest_framework import serializers
 
 
 class CurrencySerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=64, required=True)
-    email = serializers.CharField(max_length=64, required=True)
-    password = serializers.HiddenField(required=True)
-    registration_date = serializers.DateTimeField(required=True)
-    permission = serializers.CharField(max_length=64, required=True)
+    name = serializers.CharField(max_length=64, required=True)
+    code = serializers.IntegerField(required=True)
+    stock_name = serializers.CharField(max_length=64, required=True)
 
 
     def create(self, validated_data):

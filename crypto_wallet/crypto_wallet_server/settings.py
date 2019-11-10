@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'jwt_auth',
     'users',
     'wallets',
     'currencies',
@@ -74,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'crypto_wallet_server.wsgi.application'
 
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
@@ -86,17 +88,16 @@ REST_FRAMEWORK = {
     ),
 }
 
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASE = {
-    'NAME': 'wallet',
-    'USER': 'common_user',
-    'PASSWORD': '8FUQRfAaxp7Pgbvw',
-}
+DB_NAME = 'walletset'
+DB_USER = 'common_user'
+DB_PASSWORD = '8FUQRfAaxp7Pgbvw'
+
 
 JWT_AUTH = {
- 
     'JWT_VERIFY': True,
     'JWT_VERIFY_EXPIRATION': True,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
@@ -141,10 +142,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'client/public/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'client/public'),
 ]
-
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'

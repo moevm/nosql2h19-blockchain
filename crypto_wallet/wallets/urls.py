@@ -1,8 +1,8 @@
 from rest_framework import routers
-from crypto_wallet.accounts.views import UserViewSet
+from .views import WalletViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'', WalletsViewSet, basename='WalletsViewSet')
+router.register(r'', WalletViewSet, basename='WalletViewSet')
 
 urlpatterns = router.urls
