@@ -3,10 +3,10 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=64, required=True)
-    # email = serializers.CharField(max_length=64, required=True)
-    # password = serializers.HiddenField(required=True)
-    # registration_date = serializers.DateTimeField(required=True)
-    # permission = serializers.CharField(max_length=64, required=True)
+    email = serializers.CharField(max_length=64, required=True)
+    password = serializers.HiddenField(required=True)
+    registration_date = serializers.DateTimeField(required=True)
+    permission = serializers.CharField(max_length=64, required=True)
 
     class Meta:
         fields = ['username', 'email', 'registration_date', 'permission']
