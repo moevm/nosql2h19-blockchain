@@ -1,0 +1,78 @@
+from . import serializers
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+)
+from pymongo.errors import OperationFailure
+from crypto_wallet_server.database import db, user_exists
+
+
+class UserViewSet(viewsets.ViewSet):
+    """ Required for the Browsable API renderer to have a nice form. """
+    serializer_class = serializers.UserSerializer
+
+    def list(self, request):
+        users = list(db.users.find())
+        serializer = serializers.UserSerializer(instance=users, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = serializers.UserSerializer(data=request.data)
+        if serializer.is_valid():
+            """ calls UserViewSet create(validated_data) """
+            if serializer.save():
+                print('User was created')
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk=None):
+        user = get_user(username=pk)
+        if not user:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = serializers.UserSerializer(instance=user)
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        user = get_user(username=pk)
+        if not user:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serializers.UserSerializer(data=request.data, instance=user)
+        if serializer.is_valid():
+            if serializer.save():
+                return Response(serializer.data, status=status.HTTP_201_CREATED,
+                    {'id': user.id})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        user_id = get_user(username=pk).id
+        if not user_id:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if user['permission'] != 'admin':
+            user_is_deleted = db.users.delete_one({'_id': user_id})
+            wallet_is_deleted = db.wallets.delete_one({'owner_id': user_id})
+            if user_is_deleted is None:
+                raise OperationFailure("User wasn't deleted")
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            if wallet_is_deleted is None:
+                raise OperationFailure("Bank account wasn't deleted")
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+        else:
+            raise PermissionError("User can't delete administrator")
+            return Response(status=status.HTTP_405_NOT_ALLOWED)
+
+        print("User was deleted successfully")
+        return Response(status=status.HTTP_200_OK, {'id': user_id})
+
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny,])
+    def register(self, request):
+        return self.create(request)
+
+    @action(detail=True, methods=['post'], permission_classes=[AllowAny,])
+    def login(self, request):
+        return self.retrieve(request)

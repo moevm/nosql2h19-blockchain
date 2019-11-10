@@ -19,9 +19,9 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('', TemplateView.as_view(template_name='base.html'), name='home'),
-    path('authorization/', TemplateView.as_view(template_name='base.html'), name='home'),
-    path('crypro_wallet/', include('crypto_wallet_app.urls')),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('/api/v0/jwt_auth/', include('jwt_auth.urls')),
+    path('/api/v0/users/', include('users.urls')),
+    path('/api/v0/wallets/', include('wallets.urls')),
+    path('/api/v0/currencies/', include('currencies.urls')),
 ]

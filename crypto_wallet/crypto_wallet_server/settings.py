@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crypto_wallet_app.apps.CryptoWalletAppConfig',
-    'accounts.apps.AccountsConfig',
+    'rest_framework',
+    'users',
+    'wallets',
+    'currencies',
 ]
 
 MIDDLEWARE = [
@@ -71,17 +74,35 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'crypto_wallet_server.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-from pymongo import MongoClient
+DATABASE = {
+    'NAME': 'wallet',
+    'USER': 'common_user',
+    'PASSWORD': '8FUQRfAaxp7Pgbvw',
+}
 
-client = MongoClient(
-    "mongodb+srv://common_user:8FUQRfAaxp7Pgbvw@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority"
-)
-db = client.crypto
-
+JWT_AUTH = {
+ 
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+ 
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
