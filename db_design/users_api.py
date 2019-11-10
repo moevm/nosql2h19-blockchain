@@ -17,7 +17,7 @@ def generate_users_data():
             {
                 "login"         : login,
                 "password"      : "".join(random.choices("qwertyuiopasdfghjklzxcvbnm1234567890", k=8)),
-                "e-mail"        : login + "@gmail.com",
+                "email"        : login + "@gmail.com",
                 "permission"    : "user",
                 "bank_account"  : None,
                 "registration_date"  : date.fromordinal(random.randint(735665, 737490))
