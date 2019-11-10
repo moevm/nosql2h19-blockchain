@@ -1,6 +1,7 @@
 import pymongo 
 import json
 import random
+from datetime import date, datetime
 
 def get_users_from_file():
     with open("names", 'r') as file:
@@ -18,7 +19,8 @@ def generate_users_data():
                 "password"      : "".join(random.choices("qwertyuiopasdfghjklzxcvbnm1234567890", k=8)),
                 "e-mail"        : login + "@gmail.com",
                 "permission"    : "user",
-                "bank_account"  : None
+                "bank_account"  : None,
+                "registration_date"  : date.fromordinal(random.randint(735665, 737490))
             }
         )
     return list_users
@@ -82,7 +84,19 @@ def update_user_data(db, login, password=None, e_mail=None):
     print("Nothing for an update!")
 
 
+# def add_field_regist_date(db):
+#     date_ = datetime.utcnow()
+#     db.users.update_many({},
+#                          {"$set":
+#                             {"registration_date" : date_}
+#                          })
+
 def setup_collection_users(db):
-    db.users.create_index([("login", pymongo.ASCENDING)], unique=True) 
+    db.users.create_index([("login", pymongo.ASCENDING)], unique=True)
     # make required fields
     # make schema
+    
+    #db.createCollection("foo", {
+    # validator: {
+    #     $and: [ {"bar": {$type: "string", $exists: true}} ]
+    # })
