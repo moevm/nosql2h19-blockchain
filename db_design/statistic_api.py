@@ -2,7 +2,8 @@ import pymongo
 
 #statistic by registration in a month
 def get_registration_statistic(db):
-    db.users.
+    pass
+    # db.users.
     # how it make 
     #    - bad - check all users and they date of registr
     #    - good - save every day count of new users and day in db.statisctic

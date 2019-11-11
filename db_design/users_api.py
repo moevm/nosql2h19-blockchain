@@ -4,7 +4,7 @@ import random
 from datetime import date, datetime
 
 def get_users_from_file():
-    with open("names", 'r') as file:
+    with open("data_src/names", 'r') as file:
         users = file.read()
     return users.splitlines()
     
@@ -12,30 +12,32 @@ def generate_users_data():
     users = get_users_from_file()
     list_users = []
     for user in users :
-        login = "_".join(user.split(" "))
+        user_name = "_".join(user.split(" "))
         list_users.append(
             {
-                "login"         : login,
-                "password"      : "".join(random.choices("qwertyuiopasdfghjklzxcvbnm1234567890", k=8)),
-                "email"        : login + "@gmail.com",
-                "permission"    : "user",
-                "bank_account"  : None,
-                "registration_date"  : date.fromordinal(random.randint(735665, 737490))
+                "user_name"         : user_name,
+                "password"          : "".join(random.choices("qwertyuiopasdfghjklzxcvbnm1234567890", k=8)),
+                "email"             : user_name + "@gmail.com",
+                "permission"        : "user",
+                "registration_date" : datetime.utcnow().isoformat()
             }
         )
     return list_users
 
+    #  date.fromordinal(random.randint(735665, 737490))
+
+    # init_bank_account = { "bitcoin" : 0, "dollars" : 0, "rubles" : 0}
 def add_new_user(db, user):
-    init_bank_account = { "bitcoin" : 0, "dollars" : 0, "rubles" : 0}
-    user["bank_account"] = db.bank_accounts.insert_one(init_bank_account).inserted_id
-    if db.users.insert_one(user).acknowledged:
+    insereted_user = db.users.insert_one(user)
+    if insereted_user.acknowledged:
         print("The user added successful")
+        init_bank_account = {"user_id" : insereted_user.inserted_id}
+        db.bank_accounts.insert_one(init_bank_account)
     else:
         print("The user was not add")
 
-
-def delete_user_by_login(db, login):
-    user = db.users.find_one({"login": login})
+def delete_user_by_user_name(db, user_name):
+    user = db.users.find_one({"user_name": user_name})
     if user == None:
         print("User isn't exist!")
         return
@@ -54,14 +56,14 @@ def delete_user_by_login(db, login):
         print("U can't delete administrator")
 
 
-def login_is_exist(db, login):
-    if db.users.find_one({"login": login}) != None:
+def user_name_is_exist(db, user_name):
+    if db.users.find_one({"user_name": user_name}) != None:
         return True
     else:
         return False
 
-def update_user_data(db, login, password=None, e_mail=None):
-    user = db.users.find_one({"login": login})
+def update_user_data(db, user_name, password=None, e_mail=None):
+    user = db.users.find_one({"user_name": user_name})
     if user == None:
         print("Such user does not exist")
         return
@@ -92,7 +94,7 @@ def update_user_data(db, login, password=None, e_mail=None):
 #                          })
 
 def setup_collection_users(db):
-    db.users.create_index([("login", pymongo.ASCENDING)], unique=True)
+    db.users.create_index([("user_name", pymongo.ASCENDING)], unique=True)
     # make required fields
     # make schema
     
