@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,11 +42,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'jwt_auth',
     'users',
-    'wallets',
     'currencies',
+    'bank_accounts',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'crypto_wallet_server.urls'
 
@@ -95,6 +100,7 @@ REST_FRAMEWORK = {
 DB_NAME = 'walletset'
 DB_USER = 'common_user'
 DB_PASSWORD = '8FUQRfAaxp7Pgbvw'
+DB_HOST = f'mongodb+srv://{DB_USER}:{DB_PASSWORD}@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority'
 
 
 JWT_AUTH = {
@@ -137,6 +143,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+# DATETIME_FORMAT = 'iso-8601'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

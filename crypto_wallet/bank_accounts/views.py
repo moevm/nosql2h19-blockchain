@@ -1,4 +1,4 @@
-from .serializers import WalletSerializer
+from .serializers import BankAccountSerializer
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -8,12 +8,11 @@ from rest_framework.permissions import (
     IsAdminUser,
 )
 from pymongo.errors import OperationFailure
-from crypto_wallet_server.database import db, get_user
 
 
-class WalletViewSet(viewsets.ViewSet):
+class BankAccountViewSet(viewsets.ViewSet):
     """ Required for the Browsable API renderer to have a nice form. """
-    serializer_class = WalletSerializer
+    serializer_class = BankAccountSerializer
 
     def list(self, request):
         pass

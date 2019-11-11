@@ -9,7 +9,7 @@ class CurrencySerializer(serializers.Serializer):
 
     def create(self, validated_data):
         user = db.users.insert_one(**validated_data).inserted_id
-        return db.wallets.insert_one(user).acknowledged
+        return db.bank_accounts.insert_one(user).acknowledged
 
     def update(self, instance, validated_data):
         for field, value in validated_data.items():

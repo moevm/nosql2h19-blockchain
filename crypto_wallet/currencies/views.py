@@ -8,7 +8,6 @@ from rest_framework.permissions import (
     IsAdminUser,
 )
 from pymongo.errors import OperationFailure
-from crypto_wallet_server.database import db, get_user
 
 
 class CurrencyViewSet(viewsets.ViewSet):

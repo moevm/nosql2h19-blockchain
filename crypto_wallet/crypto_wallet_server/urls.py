@@ -23,6 +23,6 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='base.html'), name='base'),
     path('api/v0/jwt_auth/', include('jwt_auth.urls')),
     path('api/v0/users/', include('users.urls')),
-    path('api/v0/wallets/', include('wallets.urls')),
     path('api/v0/currencies/', include('currencies.urls')),
+    path('api/v0/bank_accounts/', include('bank_accounts.urls')),
 ]
