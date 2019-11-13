@@ -12,12 +12,12 @@ def generate_users_data():
     users = get_users_from_file()
     list_users = []
     for user in users :
-        user_name = "_".join(user.split(" "))
+        username = "_".join(user.split(" "))
         list_users.append(
             {
-                "user_name"         : user_name,
+                "username"         : username,
                 "password"          : "".join(random.choices("qwertyuiopasdfghjklzxcvbnm1234567890", k=8)),
-                "email"             : user_name + "@gmail.com",
+                "email"             : username + "@gmail.com",
                 "permission"        : "user",
                 "registration_date" : datetime.utcnow().isoformat()
             }
@@ -36,8 +36,8 @@ def add_new_user(db, user):
     else:
         print("The user was not add")
 
-def delete_user_by_user_name(db, user_name):
-    user = db.users.find_one({"user_name": user_name})
+def delete_user_by_username(db, username):
+    user = db.users.find_one({"username": username})
     if user == None:
         print("User isn't exist!")
         return
@@ -56,14 +56,14 @@ def delete_user_by_user_name(db, user_name):
         print("U can't delete administrator")
 
 
-def user_name_is_exist(db, user_name):
-    if db.users.find_one({"user_name": user_name}) != None:
+def username_is_exist(db, username):
+    if db.users.find_one({"username": username}) != None:
         return True
     else:
         return False
 
-def update_user_data(db, user_name, password=None, e_mail=None):
-    user = db.users.find_one({"user_name": user_name})
+def update_user_data(db, username, password=None, e_mail=None):
+    user = db.users.find_one({"username": username})
     if user == None:
         print("Such user does not exist")
         return
@@ -94,7 +94,7 @@ def update_user_data(db, user_name, password=None, e_mail=None):
 #                          })
 
 def setup_collection_users(db):
-    db.users.create_index([("user_name", pymongo.ASCENDING)], unique=True)
+    db.users.create_index([("username", pymongo.ASCENDING)], unique=True)
     # make required fields
     # make schema
     

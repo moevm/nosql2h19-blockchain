@@ -5,12 +5,12 @@ def make_remittance(db, user_from, user_to, resources, value_remitt):
         print("You can't transfer yourself!")
         return
 
-    instance_user_to = db.users.find_one({"user_name": user_to})
+    instance_user_to = db.users.find_one({"username": user_to})
     if instance_user_to == None:
         print("This user isn't exist")
         return
 
-    instance_user_from = db.users.find_one({"user_name": user_from})
+    instance_user_from = db.users.find_one({"username": user_from})
 
     if instance_user_from == None:
         print("Error data!")
@@ -28,7 +28,7 @@ def make_remittance(db, user_from, user_to, resources, value_remitt):
                                 { "$inc": {resources: value_remitt}})
 
 def increase_balance(db, user, resources, value_remitt):
-    instance_user =  db.users.find_one({"user_name": user})
+    instance_user =  db.users.find_one({"username": user})
     if instance_user == None:
         print("Error data!")
         return
