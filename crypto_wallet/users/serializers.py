@@ -12,7 +12,7 @@ class UserSerializer(serializers.Serializer):
     permission = serializers.CharField(max_length=64)
 
     class Meta:
-        fields = ['_id', 'username', 'email', 'registration_date', 'permission']
+        fields = ['_id', 'username', 'email', 'password', 'registration_date', 'permission']
 
     def create(self, validated_data):
         user_id = db.users.insert_one(validated_data).inserted_id

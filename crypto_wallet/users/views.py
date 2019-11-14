@@ -15,8 +15,9 @@ class UserViewSet(viewsets.ViewSet):
     serializer_class = UserSerializer
 
     def list(self, request):
-        users = list(db.users.find())
-        serializer = UserSerializer(instance=users, many=True)
+        users = [to_python(user) for user in db.users.find()]
+        serializer = UserSerializer(data=users, many=True)
+        serializer.is_valid(raise_exception=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
