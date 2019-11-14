@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "cd crypto_wallet/client && yarn build:production"
+  }
+}

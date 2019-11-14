@@ -97,7 +97,7 @@ REST_FRAMEWORK = {
 DB_NAME = 'wallet'
 DB_USER = 'common_user'
 DB_PASSWORD = '8FUQRfAaxp7Pgbvw'
-DB_HOST = f'mongodb+srv://{DB_USER}:{DB_PASSWORD}@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority'
+DB_HOST = 'mongodb+srv://{DB_USER}:{DB_PASSWORD}@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority'
 
 
 JWT_AUTH = {

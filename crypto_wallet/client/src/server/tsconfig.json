@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    // "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "build/*": ["/../../build/*"]
+    },
+    "typeRoots": ["../types", "../node_modules/@types"]
+  },
+  "exclude": ["node_modules"]
+}
