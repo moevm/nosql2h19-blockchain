@@ -65,11 +65,11 @@ class UserViewSet(viewsets.ViewSet):
         print("User was deleted successfully")
         return Response(data={'id': user_id}, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['post'], permission_classes=[AllowAny,])
+    @action(detail=False, methods=['get', 'post'], permission_classes=[AllowAny,])
     def register(self, request):
         return self.create(request)
 
-    @action(detail=False, methods=['post'], permission_classes=[AllowAny,])
+    @action(detail=False, methods=['get', 'post'], permission_classes=[AllowAny,])
     def login(self, request):
         user = db.users.find_one(request.data)
         if user is None:
