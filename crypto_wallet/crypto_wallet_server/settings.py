@@ -97,7 +97,7 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DB_NAME = 'walletset'
+DB_NAME = 'wallet'
 DB_USER = 'common_user'
 DB_PASSWORD = '8FUQRfAaxp7Pgbvw'
 DB_HOST = 'mongodb+srv://{DB_USER}:{DB_PASSWORD}@blockchain-60374.gcp.mongodb.net/admin?retryWrites=true&w=majority'
