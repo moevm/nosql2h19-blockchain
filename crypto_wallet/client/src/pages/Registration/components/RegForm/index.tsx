@@ -34,29 +34,29 @@ const RegForm: FC<Props> = ({ classes, requestRegistration }) => {
       <Input
         className={classes.input}
         type="email"
-        ph="E-mail"
+        placeholder="E-mail"
         value={regForm.email}
-        onInputChange={(email: string) => setRegForm({ ...regForm, email })}
+        onChange={e => setRegForm({ ...regForm, email: e.target.value })}
       />
       <Input
         className={classes.input}
-        ph="Login"
+        placeholder="Login"
         value={regForm.login}
-        onInputChange={(login: string) => setRegForm({ ...regForm, login })}
+        onChange={e => setRegForm({ ...regForm, login: e.target.value })}
       />
       <Input
         className={classes.input}
         type="password"
-        ph="Password"
+        placeholder="Password"
         value={regForm.password}
-        onInputChange={(password: string) => setRegForm({ ...regForm, password })}
+        onChange={e => setRegForm({ ...regForm, password: e.target.value })}
       />
       <Input
         className={classes.input}
         type="password"
-        ph="Repeat password"
+        placeholder="Repeat password"
         value={regForm.rPassword}
-        onInputChange={(rPassword: string) => setRegForm({ ...regForm, rPassword })}
+        onChange={e => setRegForm({ ...regForm, rPassword: e.target.value })}
       />
       <SubmitButton className={classes.button} onSubmitButtonClick={onButtonClick}>
         Sign up

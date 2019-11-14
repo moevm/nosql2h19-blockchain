@@ -28,17 +28,17 @@ const Exchange: FC<Props> = ({ classes }) => {
       <CurrencyInput
         className={classes.input}
         text="I give"
-        ph="0"
+        placeholder="0"
         value={exchange.value1}
-        onInputChange={(value1: string) => setExchange({ ...exchange, value1 })}
+        onChange={e => setExchange({ ...exchange, value1: e.target.value })}
       />
 
       <CurrencyInput
         className={classes.input}
         text="I receive"
-        ph="0"
+        placeholder="0"
         value={exchange.value2}
-        onInputChange={(value2: string) => setExchange({ ...exchange, value2 })}
+        onChange={e => setExchange({ ...exchange, value2: e.target.value })}
       />
 
       <SubmitButton className={classes.button} onSubmitButtonClick={onButtonClick}>

@@ -28,16 +28,18 @@ const AuthForm: FC<Props> = ({ classes, requestAuthorization }) => {
     <Form className={classes.form}>
       <Input
         className={classes.input}
-        ph="Login"
+        autoComplete="username"
+        placeholder="Login"
         value={authForm.login}
-        onInputChange={(login: string) => setAuthForm({ ...authForm, login })}
+        onChange={e => setAuthForm({ ...authForm, login: e.target.value })}
       />
       <Input
         className={classes.input}
+        autoComplete="password"
         type="password"
-        ph="Password"
+        placeholder="Password"
         value={authForm.password}
-        onInputChange={(password: string) => setAuthForm({ ...authForm, password })}
+        onChange={e => setAuthForm({ ...authForm, password: e.target.value })}
       />
       <SubmitButton className={classes.button} onSubmitButtonClick={onButtonClick}>
         Sign in

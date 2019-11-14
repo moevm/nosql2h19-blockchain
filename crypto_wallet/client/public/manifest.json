@@ -1,14 +1,14 @@
 {
-  "client.js": "/static//client.63fba812c598b76cb313.js",
-  "pages/Account.js": "/static//pages/Account.f2b9ce88cf18ac24c8b5.js",
-  "pages/Authorization.js": "/static//pages/Authorization.d36b016c0b4739c5ad6f.js",
-  "pages/Index.js": "/static//pages/Index.e910a53a29a3d7bebae0.js",
-  "pages/NotFound.js": "/static//pages/NotFound.aa5472b77a5817019c96.js",
-  "pages/Registration.js": "/static//pages/Registration.c1fb0c9de77080f1e758.js",
+  "client.js": "/static//client.7f791859fbec9e447ecb.js",
+  "pages/Account.js": "/static//pages/Account.7d989204bfe88022fdc2.js",
+  "pages/Authorization.js": "/static//pages/Authorization.4524819b01e5f8ee900e.js",
+  "pages/Index.js": "/static//pages/Index.c5565dc2cc8d467feddc.js",
+  "pages/NotFound.js": "/static//pages/NotFound.f00f0aecdfff579f0e6d.js",
+  "pages/Registration.js": "/static//pages/Registration.24e1cdb76ac2d5442bbf.js",
   "assets/images/background.svg": "/static//assets/images/1510d37e08a3f182dcf0d78630e0f4d5.svg",
-  "client.63fba812c598b76cb313.js.gz": "/static//client.63fba812c598b76cb313.js.gz",
+  "client.7f791859fbec9e447ecb.js.gz": "/static//client.7f791859fbec9e447ecb.js.gz",
   "index.html": "/static//index.html",
-  "pages/Account.f2b9ce88cf18ac24c8b5.js.gz": "/static//pages/Account.f2b9ce88cf18ac24c8b5.js.gz",
-  "pages/Authorization.d36b016c0b4739c5ad6f.js.gz": "/static//pages/Authorization.d36b016c0b4739c5ad6f.js.gz",
-  "pages/Registration.c1fb0c9de77080f1e758.js.gz": "/static//pages/Registration.c1fb0c9de77080f1e758.js.gz"
+  "pages/Account.7d989204bfe88022fdc2.js.gz": "/static//pages/Account.7d989204bfe88022fdc2.js.gz",
+  "pages/Authorization.4524819b01e5f8ee900e.js.gz": "/static//pages/Authorization.4524819b01e5f8ee900e.js.gz",
+  "pages/Registration.24e1cdb76ac2d5442bbf.js.gz": "/static//pages/Registration.24e1cdb76ac2d5442bbf.js.gz"
 }
