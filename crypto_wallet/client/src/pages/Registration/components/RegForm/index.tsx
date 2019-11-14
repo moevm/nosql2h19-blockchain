@@ -19,7 +19,7 @@ interface Props extends OuterProps, DispatchProps, JSSProps<typeof styles> {}
 
 const RegForm: FC<Props> = ({ classes, requestRegistration }) => {
   const [regForm, setRegForm] = useState<Data.Registration>({
-    login: '',
+    username: '',
     email: '',
     password: '',
     rPassword: ''
@@ -41,8 +41,8 @@ const RegForm: FC<Props> = ({ classes, requestRegistration }) => {
       <Input
         className={classes.input}
         placeholder="Login"
-        value={regForm.login}
-        onChange={e => setRegForm({ ...regForm, login: e.target.value })}
+        value={regForm.username}
+        onChange={e => setRegForm({ ...regForm, username: e.target.value })}
       />
       <Input
         className={classes.input}

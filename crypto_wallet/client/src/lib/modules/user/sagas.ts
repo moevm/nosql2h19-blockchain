@@ -17,7 +17,7 @@ function* requestRegistration(action: RegistrationRequestAction) {
     const result = yield call(fetchAPI, {
       path: 'users/register/',
       method: METHOD.POST,
-      body: action.payload
+      body: { ...action.payload, registration_date: new Date(), permission: 'user' }
     })
     console.log(result)
     yield put(registrationSuccess())

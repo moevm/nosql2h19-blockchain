@@ -1,14 +1,14 @@
 {
-  "client.js": "/static//client.385b6cd632c227d8fe8e.js",
-  "pages/Account.js": "/static//pages/Account.7d989204bfe88022fdc2.js",
-  "pages/Authorization.js": "/static//pages/Authorization.55a0a99ccff47f7f4213.js",
-  "pages/Index.js": "/static//pages/Index.c5565dc2cc8d467feddc.js",
-  "pages/NotFound.js": "/static//pages/NotFound.f00f0aecdfff579f0e6d.js",
-  "pages/Registration.js": "/static//pages/Registration.24e1cdb76ac2d5442bbf.js",
+  "client.js": "/static//client.0946227f442fd4857581.js",
+  "pages/Account.js": "/static//pages/Account.a8912fa8f0604b0b575a.js",
+  "pages/Authorization.js": "/static//pages/Authorization.8fdaabe35edafe9c0c27.js",
+  "pages/Index.js": "/static//pages/Index.3ef872a11e3cef160277.js",
+  "pages/NotFound.js": "/static//pages/NotFound.a0a75fd63e182f952c2b.js",
+  "pages/Registration.js": "/static//pages/Registration.30a4c40a628776cbeed4.js",
   "assets/images/background.svg": "/static//assets/images/1510d37e08a3f182dcf0d78630e0f4d5.svg",
-  "client.385b6cd632c227d8fe8e.js.gz": "/static//client.385b6cd632c227d8fe8e.js.gz",
+  "client.0946227f442fd4857581.js.gz": "/static//client.0946227f442fd4857581.js.gz",
   "index.html": "/static//index.html",
-  "pages/Account.7d989204bfe88022fdc2.js.gz": "/static//pages/Account.7d989204bfe88022fdc2.js.gz",
-  "pages/Authorization.55a0a99ccff47f7f4213.js.gz": "/static//pages/Authorization.55a0a99ccff47f7f4213.js.gz",
-  "pages/Registration.24e1cdb76ac2d5442bbf.js.gz": "/static//pages/Registration.24e1cdb76ac2d5442bbf.js.gz"
+  "pages/Account.a8912fa8f0604b0b575a.js.gz": "/static//pages/Account.a8912fa8f0604b0b575a.js.gz",
+  "pages/Authorization.8fdaabe35edafe9c0c27.js.gz": "/static//pages/Authorization.8fdaabe35edafe9c0c27.js.gz",
+  "pages/Registration.30a4c40a628776cbeed4.js.gz": "/static//pages/Registration.30a4c40a628776cbeed4.js.gz"
 }
