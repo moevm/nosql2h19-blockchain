@@ -1,14 +1,14 @@
 {
-  "client.js": "/static//client.7f791859fbec9e447ecb.js",
+  "client.js": "/static//client.385b6cd632c227d8fe8e.js",
   "pages/Account.js": "/static//pages/Account.7d989204bfe88022fdc2.js",
-  "pages/Authorization.js": "/static//pages/Authorization.4524819b01e5f8ee900e.js",
+  "pages/Authorization.js": "/static//pages/Authorization.55a0a99ccff47f7f4213.js",
   "pages/Index.js": "/static//pages/Index.c5565dc2cc8d467feddc.js",
   "pages/NotFound.js": "/static//pages/NotFound.f00f0aecdfff579f0e6d.js",
   "pages/Registration.js": "/static//pages/Registration.24e1cdb76ac2d5442bbf.js",
   "assets/images/background.svg": "/static//assets/images/1510d37e08a3f182dcf0d78630e0f4d5.svg",
-  "client.7f791859fbec9e447ecb.js.gz": "/static//client.7f791859fbec9e447ecb.js.gz",
+  "client.385b6cd632c227d8fe8e.js.gz": "/static//client.385b6cd632c227d8fe8e.js.gz",
   "index.html": "/static//index.html",
   "pages/Account.7d989204bfe88022fdc2.js.gz": "/static//pages/Account.7d989204bfe88022fdc2.js.gz",
-  "pages/Authorization.4524819b01e5f8ee900e.js.gz": "/static//pages/Authorization.4524819b01e5f8ee900e.js.gz",
+  "pages/Authorization.55a0a99ccff47f7f4213.js.gz": "/static//pages/Authorization.55a0a99ccff47f7f4213.js.gz",
   "pages/Registration.24e1cdb76ac2d5442bbf.js.gz": "/static//pages/Registration.24e1cdb76ac2d5442bbf.js.gz"
 }

@@ -15,11 +15,11 @@ import TYPES from './types'
 function* requestRegistration(action: RegistrationRequestAction) {
   try {
     const result = yield call(fetchAPI, {
-      path: 'register',
+      path: 'users/register/',
       method: METHOD.POST,
       body: action.payload
     })
-
+    console.log(result)
     yield put(registrationSuccess())
   } catch (error) {
     yield put(registrationFailure())
@@ -33,7 +33,7 @@ function* requestAuthorization(action: AuthorizationRequestAction) {
       method: METHOD.POST,
       body: action.payload
     })
-
+    console.log(result)
     yield put(authorizationSuccess())
   } catch (error) {
     yield put(authorizationFailure())
