@@ -17,3 +17,9 @@ __pycache__/
 secret.txt
 
 .DS_Store 
+
+# Client 
+!crypto_wallet/client/
+crypto_wallet/client/*
+!crypto_wallet/client/public/
+!crypto_wallet/client/src
