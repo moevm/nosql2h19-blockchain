@@ -14,12 +14,13 @@ import TYPES from './types'
 
 function* requestRegistration(action: RegistrationRequestAction) {
   try {
-    const result = yield call(fetchAPI, {
+    const { data } = yield call(fetchAPI, {
       path: 'users/register/',
       method: METHOD.POST,
       body: { ...action.payload, registration_date: new Date(), permission: 'user' }
     })
-    console.log(result)
+
+    console.log(data)
     yield put(registrationSuccess())
   } catch (error) {
     yield put(registrationFailure())
@@ -28,12 +29,13 @@ function* requestRegistration(action: RegistrationRequestAction) {
 
 function* requestAuthorization(action: AuthorizationRequestAction) {
   try {
-    const result = yield call(fetchAPI, {
+    const { data } = yield call(fetchAPI, {
       path: 'users/login/',
       method: METHOD.POST,
       body: action.payload
     })
-    console.log(result)
+
+    console.log(data)
     yield put(authorizationSuccess())
   } catch (error) {
     yield put(authorizationFailure())

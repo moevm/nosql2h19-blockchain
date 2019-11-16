@@ -18,7 +18,7 @@ interface DispatchProps {
 interface Props extends OuterProps, DispatchProps, JSSProps<typeof styles> {}
 
 const AuthForm: FC<Props> = ({ classes, requestAuthorization }) => {
-  const [authForm, setAuthForm] = useState<Data.Authorization>({ username: '', password: '' })
+  const [authForm, setAuthForm] = useState<Data.Authorization>({ username: 'Lonnie_Bishop', password: '1xmqm650' })
 
   const onButtonClick = () => {
     requestAuthorization(authForm)
@@ -30,7 +30,7 @@ const AuthForm: FC<Props> = ({ classes, requestAuthorization }) => {
         className={classes.input}
         autoComplete="username"
         placeholder="Username"
-        value={authForm.login}
+        value={authForm.username}
         onChange={e => setAuthForm({ ...authForm, username: e.target.value })}
       />
       <Input
