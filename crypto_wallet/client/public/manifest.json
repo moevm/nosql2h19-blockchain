@@ -1,14 +1,10 @@
 {
-  "client.js": "/static//client.c863f64f769795f9403e.js",
-  "pages/Account.js": "/static//pages/Account.6bfc584f947e7d9552e9.js",
-  "pages/Authorization.js": "/static//pages/Authorization.89191c0250ac8b9dd3e3.js",
-  "pages/Index.js": "/static//pages/Index.3384202648d8c9064b90.js",
-  "pages/NotFound.js": "/static//pages/NotFound.ab4aa0498c3d7d25d9c3.js",
-  "pages/Registration.js": "/static//pages/Registration.6c3a3c4b484b0a31fad4.js",
-  "assets/images/background.svg": "/static//assets/images/1510d37e08a3f182dcf0d78630e0f4d5.svg",
-  "client.c863f64f769795f9403e.js.gz": "/static//client.c863f64f769795f9403e.js.gz",
-  "index.html": "/static//index.html",
-  "pages/Account.6bfc584f947e7d9552e9.js.gz": "/static//pages/Account.6bfc584f947e7d9552e9.js.gz",
-  "pages/Authorization.89191c0250ac8b9dd3e3.js.gz": "/static//pages/Authorization.89191c0250ac8b9dd3e3.js.gz",
-  "pages/Registration.6c3a3c4b484b0a31fad4.js.gz": "/static//pages/Registration.6c3a3c4b484b0a31fad4.js.gz"
+  "client.js": "//client.e9e418a1c731ff2e0778.js",
+  "pages/Account.js": "//pages/Account.387267833f21c7141d74.js",
+  "pages/Authorization.js": "//pages/Authorization.cb0f8b09f8f3bfbeca33.js",
+  "pages/Index.js": "//pages/Index.e847a8507673bcbe7715.js",
+  "pages/NotFound.js": "//pages/NotFound.ee35082ad097e2b9e2ea.js",
+  "pages/Registration.js": "//pages/Registration.47b5a67b5e0098eede31.js",
+  "assets/images/background.svg": "//assets/images/background.svg",
+  "index.html": "//index.html"
 }

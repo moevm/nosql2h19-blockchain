@@ -35,8 +35,15 @@ function* requestAuthorization(action: AuthorizationRequestAction) {
       body: action.payload
     })
 
-    console.log(data)
-    yield put(authorizationSuccess())
+    yield put(
+      authorizationSuccess({
+        id: data._id,
+        email: data.email,
+        username: data.username,
+        permission: data.permission,
+        regDate: new Date(data.registration_date)
+      })
+    )
   } catch (error) {
     yield put(authorizationFailure())
   }

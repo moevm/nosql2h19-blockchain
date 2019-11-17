@@ -17,9 +17,9 @@ const Account: FC<Props> = ({ classes }) => (
   <Fragment>
     <Helmet title="Wallet" />
     <section className={classes.wrapper}>
-      <UserInfo />
-      <MoneyInfo className={classes.moneyInfo} />
+      <UserInfo className={classes.userInfo} />
       <Exchange />
+      <MoneyInfo />
     </section>
   </Fragment>
 )

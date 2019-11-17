@@ -1,21 +1,18 @@
 const styles = (theme: App.Theme) => ({
   wrapper: {
     display: 'grid',
-    gridTemplateColumns: '70% 30%',
-    gridTemplateRows: '35% 65%',
+    gridTemplateRows: '40px 1fr',
+    gridTemplateColumns: '3fr 2fr',
     gridTemplateAreas: `
-      "user money"
-      "operations money"
+      'user user'
+      'exchange money'
     `,
+    gridGap: '40px',
     width: '100%',
-    backgroundColor: theme.colors.account.background
+    padding: '40px 0'
   },
-  title: {
-    textAlign: 'center'
-  },
-  container: {},
-  moneyInfo: {
-    gridArea: 'money'
+  userInfo: {
+    gridArea: 'user'
   }
 })
 

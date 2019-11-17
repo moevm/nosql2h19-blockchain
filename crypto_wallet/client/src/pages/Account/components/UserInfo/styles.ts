@@ -1,27 +1,14 @@
 const styles = (theme: App.Theme) => ({
   wrapper: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gridTemplateRows: 'repeat(4, 1fr)',
-    gridTemplateAreas: `
-      ". title title"
-      "avatar sub sub"
-      "avatar sub sub"
-      " . sub sub"`
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   title: {
-    gridArea: 'title'
+    fontSize: '2rem'
   },
-  avatar: {
-    gridArea: 'avatar',
-    backgroundColor: '#efa'
-  },
-  list: {
-    gridArea: 'sub'
-  },
-  item: {
-    marginBottom: 20,
-    listStyle: 'none'
+  date: {
+    fontSize: '0.75rem'
   }
 })
 

@@ -1,11 +1,12 @@
 const styles = (theme: App.Theme) => ({
-  wrapper: {
-    backgroundColor: '#fea'
+  wrapper: {},
+  title: {
+    margin: 0,
+    marginBottom: 10,
+    fontSize: '2rem'
   },
-  title: {},
   table: {
     width: '100%',
-    backgroundColor: '#6cf',
     border: '1px solid black'
   },
   tBody: {},
@@ -13,6 +14,7 @@ const styles = (theme: App.Theme) => ({
     height: 40
   },
   td: {
+    paddingLeft: 10,
     backgroundColor: 'white',
     border: '1px solid black'
   }

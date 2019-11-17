@@ -1,7 +1,7 @@
 const styles = (theme: App.Theme) => ({
   form: {
     alignItems: 'flex-start',
-    padding: '40px 100px',
+    padding: 0,
     backgroundColor: theme.colors.account.exchange.form.background,
     borderRadius: 0,
     boxShadow: 'none'
