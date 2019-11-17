@@ -1,10 +1,11 @@
 {
-  "client.js": "//client.e9e418a1c731ff2e0778.js",
-  "pages/Account.js": "//pages/Account.387267833f21c7141d74.js",
+  "client.js": "//client.bfdaf4108749d5730880.js",
+  "pages/Account.js": "//pages/Account.dc66c1c6ed8b89cd1f61.js",
   "pages/Authorization.js": "//pages/Authorization.cb0f8b09f8f3bfbeca33.js",
-  "pages/Index.js": "//pages/Index.e847a8507673bcbe7715.js",
+  "pages/Index.js": "//pages/Index.537fa808d6febfba68ca.js",
   "pages/NotFound.js": "//pages/NotFound.ee35082ad097e2b9e2ea.js",
   "pages/Registration.js": "//pages/Registration.47b5a67b5e0098eede31.js",
+  "vendors~pages/Index.js": "//vendors~pages/Index.4863c514ded5bf8b6940.js",
   "assets/images/background.svg": "//assets/images/background.svg",
   "index.html": "//index.html"
 }
