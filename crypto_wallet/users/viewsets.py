@@ -68,3 +68,7 @@ class UserViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['post'], permission_classes=[AllowAny,])
     def register(self, request):
         return self.create(request)
+
+    @action(detail=False, methods=['get'], permission_classes=[AllowAny,])
+    def current(self, request):
+        return Response(data=request.user, status=status.HTTP_200_OK)
