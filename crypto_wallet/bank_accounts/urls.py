@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .views import BankAccountViewSet
+from .viewsets import BankAccountViewSet
 
 router = routers.DefaultRouter()
 
