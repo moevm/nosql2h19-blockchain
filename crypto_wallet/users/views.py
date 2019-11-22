@@ -15,6 +15,7 @@ class UserViewSet(viewsets.ViewSet):
     serializer_class = UserSerializer
 
     def list(self, request):
+        print(request.user)
         users = [to_python(user) for user in db.users.find()]
         serializer = UserSerializer(data=users, many=True)
         serializer.is_valid(raise_exception=True)
@@ -61,17 +62,10 @@ class UserViewSet(viewsets.ViewSet):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             print("User can't delete administrator")
-            return Response(status=status.HTTP_405_NOT_ALLOWED)
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         print("User was deleted successfully")
         return Response(data={'id': user_id}, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['get', 'post'], permission_classes=[AllowAny,])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny,])
     def register(self, request):
         return self.create(request)
-
-    @action(detail=False, methods=['get', 'post'], permission_classes=[AllowAny,])
-    def login(self, request):
-        user = db.users.find_one(request.data)
-        if user is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        return Response(data=to_python(user), status=status.HTTP_200_OK)

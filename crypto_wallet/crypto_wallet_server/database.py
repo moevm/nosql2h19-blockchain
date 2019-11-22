@@ -22,8 +22,17 @@ def to_python(mongo_data):
             if isinstance(v, ObjectId):
                 mongo_data[k] = decode_value(v)
     else:
-        return encode_value(mongo_data)
+        return decode_value(mongo_data)
     return mongo_data
 
 def to_frontend():
     pass
+
+def get_user(data):
+    _id = data.get('_id', None)
+    if _id is not None:
+        data['_id'] = encode_value(_id)
+    user = db.users.find_one(data)
+    if user:
+        return to_python(user)
+    return None
