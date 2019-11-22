@@ -1,4 +1,6 @@
 const colors = {
+  text: '#FFFFFF',
+  bg: '#fff',
   components: {
     form: {
       bg: '#212121'
@@ -19,13 +21,26 @@ const colors = {
       background: '#fff'
     }
   },
-  main: {},
   footer: {
     background: '#212121'
   },
-  text: '#FFFFFF',
-  bg: '#fff',
   // pages color
+  index: {
+    menu: {
+      item: {
+        border: '#fff'
+      },
+      button: {
+        color: '#fff',
+        background: '#eee',
+        border: '#ddd',
+        hover: {
+          color: '#fe314f',
+          background: '#212121'
+        }
+      }
+    }
+  },
   account: {
     background: 'rgba(255, 255, 255, 0.8)',
     exchange: {
