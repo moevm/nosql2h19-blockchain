@@ -23,16 +23,29 @@ def to_python(mongo_data):
                 mongo_data[k] = decode_value(v)
     else:
         return decode_value(mongo_data)
+    print(mongo_data)
     return mongo_data
+
+def to_mongo(data):
+    _id = data.get('_id', None)
+    user_id = data.get('user_id', None)
+    if _id is not None:
+        data['_id'] = encode_value(_id)
+    if user_id is not None:
+        data['user_id'] = encode_value(user_id)
+    return data
 
 def to_frontend():
     pass
 
 def get_user(data):
-    _id = data.get('_id', None)
-    if _id is not None:
-        data['_id'] = encode_value(_id)
-    user = db.users.find_one(data)
-    if user:
+    user = db.users.find_one(to_mongo(data))
+    if user is not None:
         return to_python(user)
+    return None
+
+def get_bank_account(data):
+    bank_account = db.bank_accounts.find_one(to_mongo(data))
+    if bank_account is not None:
+        return to_python(bank_account)
     return None

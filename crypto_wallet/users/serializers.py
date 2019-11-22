@@ -1,7 +1,8 @@
+from django.conf import settings
 from rest_framework import serializers
-from crypto_wallet_server import settings
-from crypto_wallet_server.database import db, encode_value, to_python
 
+from crypto_wallet_server.database import db, to_python, get_user
+from bank_accounts.serializers import BankAccountSerializer
 
 class UserSerializer(serializers.Serializer):
     _id = serializers.UUIDField(read_only=True)
@@ -16,8 +17,11 @@ class UserSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         user_id = db.users.insert_one(validated_data).inserted_id
-        db.bank_accounts.insert_one({'owner_id': user_id}).acknowledged
-        return to_python(db.users.find_one({'_id': user_id}))
+        serializer = BankAccountSerializer(data={'user_id': to_python(user_id)})
+        serializer.is_valid(raise_exception=True)
+        if serializer.save():
+            """calling BankAccountSerializer create(validated_data)"""
+        return get_user({'_id': user_id})
 
     def update(self, instance, validated_data):
         for field, value in validated_data.items():
