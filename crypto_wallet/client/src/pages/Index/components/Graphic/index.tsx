@@ -10,7 +10,9 @@ import styles from './styles'
 interface OuterProps {}
 
 interface StateProps {
-  chart: any
+  currency: string
+  xCoord: string[]
+  yCoord: string[]
 }
 
 interface DispatchProps {
@@ -19,24 +21,24 @@ interface DispatchProps {
 
 interface Props extends OuterProps, StateProps, DispatchProps, JSSProps<typeof styles> {}
 
-const Graphic: FC<Props> = ({ classes, chart, requestData }) => {
+const Graphic: FC<Props> = ({ classes, currency, xCoord, yCoord, requestData }) => {
   useEffect(() => {
     requestData()
-  }, [])
-  console.log(chart)
+  }, [currency])
+
   return (
     <div className={classes.wrapper}>
       <ReactEcharts
         option={{
           xAxis: {
-            data: chart.x
+            data: xCoord
           },
           yAxis: {
             type: 'value'
           },
           series: [
             {
-              data: chart.y,
+              data: yCoord,
               type: 'line'
             }
           ]
@@ -47,7 +49,9 @@ const Graphic: FC<Props> = ({ classes, chart, requestData }) => {
 }
 
 const mapStateToProps: MapStateToProps<StateProps, Props, App.State> = state => ({
-  chart: state.chart
+  currency: state.chart.currency,
+  xCoord: state.chart.x,
+  yCoord: state.chart.y
 })
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, Props> = dispatch => ({

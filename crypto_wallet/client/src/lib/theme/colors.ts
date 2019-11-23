@@ -32,7 +32,7 @@ const colors = {
       },
       button: {
         color: '#fff',
-        background: '#eee',
+        background: 'rgba(0, 0, 0, 0.1)',
         border: '#ddd',
         hover: {
           color: '#fe314f',

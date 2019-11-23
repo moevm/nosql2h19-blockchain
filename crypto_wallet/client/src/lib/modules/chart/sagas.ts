@@ -6,6 +6,7 @@ import TYPES from './types'
 
 function* requestData() {
   const key = '9WRKSH7X77NIRPL2'
+
   try {
     let { data } = yield call(fetchAPI, {
       otherUrl: `

@@ -1,8 +1,8 @@
 {
-  "client.js": "//client.a4446bf259a6a47387ea.js",
+  "client.js": "//client.b892462224f31a36c1ae.js",
   "pages/Account.js": "//pages/Account.dc66c1c6ed8b89cd1f61.js",
   "pages/Authorization.js": "//pages/Authorization.cb0f8b09f8f3bfbeca33.js",
-  "pages/Index.js": "//pages/Index.3eaba72ebbb770c8005b.js",
+  "pages/Index.js": "//pages/Index.edabc2e4be5b10bb981f.js",
   "pages/NotFound.js": "//pages/NotFound.ee35082ad097e2b9e2ea.js",
   "pages/Registration.js": "//pages/Registration.47b5a67b5e0098eede31.js",
   "vendors~pages/Index.js": "//vendors~pages/Index.4863c514ded5bf8b6940.js",
