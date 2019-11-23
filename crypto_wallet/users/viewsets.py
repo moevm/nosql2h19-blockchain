@@ -2,12 +2,9 @@ from .serializers import UserSerializer
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.permissions import (
-    AllowAny,
-    IsAuthenticated,
-    IsAdminUser,
-)
-from crypto_wallet_server.database import db, encode_value, to_python
+from rest_framework.permissions import AllowAny
+
+from crypto_wallet_server.database import db, encode_value, to_python, get_user
 
 
 class UserViewSet(viewsets.ViewSet):
@@ -24,19 +21,18 @@ class UserViewSet(viewsets.ViewSet):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         if serializer.save():
-            """ calls UserViewSet create(validated_data) """
+            """calling UserViewSet create(validated_data) """
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
-        user = db.users.find_one({'_id': encode_value(pk)})
+        user = get_user({'_id': pk})
         if user is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        return Response(data=to_python(user), status=status.HTTP_200_OK,)
+        return Response(data=to_python(user), status=status.HTTP_200_OK)
 
     def update(self, request, pk=None):
-        user_id = encode_value(pk)
-        user = db.users.find_one({'_id': user_id})
+        user = get_user({'_id': pk})
         if user is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = UserSerializer(data=request.data, instance=user)
@@ -46,13 +42,13 @@ class UserViewSet(viewsets.ViewSet):
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, pk=None):
+        user = get_user({'_id': pk})
         user_id = encode_value(pk)
-        user = db.users.find_one({'_id': user_id})
         if user is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
         if user['permission'] != 'admin':
             user_is_deleted = db.users.delete_one({'_id': user_id})
-            bank_account_is_deleted = db.bank_accounts.delete_one({'owner_id': user_id})
+            bank_account_is_deleted = db.bank_accounts.delete_one({'user_id': user_id})
             if user_is_deleted is None:
                 print("User wasn't deleted")
                 return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -61,17 +57,14 @@ class UserViewSet(viewsets.ViewSet):
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             print("User can't delete administrator")
-            return Response(status=status.HTTP_405_NOT_ALLOWED)
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         print("User was deleted successfully")
-        return Response(data={'id': user_id}, status=status.HTTP_200_OK)
+        return Response(data={'id': pk}, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['get', 'post'], permission_classes=[AllowAny,])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny,])
     def register(self, request):
         return self.create(request)
 
-    @action(detail=False, methods=['get', 'post'], permission_classes=[AllowAny,])
-    def login(self, request):
-        user = db.users.find_one(request.data)
-        if user is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        return Response(data=to_python(user), status=status.HTTP_200_OK)
+    @action(detail=False, methods=['get'], permission_classes=[AllowAny,])
+    def current(self, request):
+        return Response(data=request.user, status=status.HTTP_200_OK)

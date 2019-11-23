@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .views import CurrencyViewSet
+from .viewsets import CurrencyViewSet
 
 router = routers.DefaultRouter()
 
