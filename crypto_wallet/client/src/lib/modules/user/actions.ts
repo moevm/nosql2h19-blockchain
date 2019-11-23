@@ -25,6 +25,12 @@ export interface AuthorizationFailureAction extends Action<TYPES.AUTH_FAILURE> {
   error: string
 }
 
+export interface GetUserInfoAction extends Action<TYPES.GET_USER_INFO> {
+  payload: {
+    token: string
+  }
+}
+
 export type ActionTypes =
   | RegistrationRequestAction
   | RegistrationSuccessAction
@@ -32,6 +38,7 @@ export type ActionTypes =
   | AuthorizationRequestAction
   | AuthorizationSuccessAction
   | AuthorizationFailureAction
+  | GetUserInfoAction
 
 // Registration
 export const registrationRequest: ActionCreator<RegistrationRequestAction> = (
@@ -71,4 +78,11 @@ export const authorizationSuccess: ActionCreator<AuthorizationSuccessAction> = (
 export const authorizationFailure: ActionCreator<AuthorizationFailureAction> = (error: string) => ({
   type: TYPES.AUTH_FAILURE,
   error
+})
+
+export const getUserInfo: ActionCreator<GetUserInfoAction> = token => ({
+  type: TYPES.GET_USER_INFO,
+  payload: {
+    token
+  }
 })

@@ -6,6 +6,7 @@ import { ActionTypes } from './actions'
 export type UserState = Data.User
 
 const initialState: UserState = {
+  token: '',
   id: '0',
   email: 'dummy@mail.com',
   username: 'dummy',

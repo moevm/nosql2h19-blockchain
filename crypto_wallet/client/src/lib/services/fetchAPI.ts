@@ -6,6 +6,7 @@ interface FetchOptions {
   otherUrl?: string
   version?: string
   path?: string
+  token?: string
   method?: METHOD
   body?: any
 }
@@ -13,6 +14,7 @@ interface FetchOptions {
 function fetchAPI<T extends {}>({
   otherUrl = '',
   version = 'v0',
+  token = '',
   method = METHOD.GET,
   path = '',
   body
@@ -23,8 +25,11 @@ function fetchAPI<T extends {}>({
     console.log('API CALL', method.toUpperCase(), url, body)
   }
 
+  const headers = token ? { authorization: `Bearer ${token}` } : ''
+
   return axios.request<T>({
     url,
+    headers,
     method,
     data: body
   })
