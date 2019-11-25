@@ -2,7 +2,8 @@ import { push } from 'react-router-redux'
 import { put, call, takeLatest, all, select } from 'redux-saga/effects'
 
 import fetchAPI from 'lib/services/fetchAPI'
-import { METHOD } from 'constants/api'
+import { METHOD, ENDPOINT } from 'constants/api'
+import { walletRequest } from 'lib/modules/wallet/actions'
 import {
   RegistrationRequestAction,
   registrationSuccess,
@@ -10,22 +11,22 @@ import {
   AuthorizationRequestAction,
   authorizationSuccess,
   authorizationFailure,
-  GetUserInfoAction,
-  getUserInfo
+  UserInfoRequestAction,
+  UserInfoRequest,
+  UserInfoSuccess
 } from './actions'
 import TYPES from './types'
 
-const getToken = (state: App.State) => state.user.token
+// const getToken = (state: App.State) => state.user.token
 
 function* requestRegistration(action: RegistrationRequestAction) {
   try {
     const { data } = yield call(fetchAPI, {
-      path: 'users/register/',
+      endpoint: ENDPOINT.REG,
       method: METHOD.POST,
       body: { ...action.payload, registration_date: new Date(), permission: 'user' }
     })
 
-    console.log(data)
     yield put(registrationSuccess())
   } catch (error) {
     yield put(registrationFailure())
@@ -35,37 +36,36 @@ function* requestRegistration(action: RegistrationRequestAction) {
 function* requestAuthorization(action: AuthorizationRequestAction) {
   try {
     const { data } = yield call(fetchAPI, {
-      path: 'jwt_auth/authenticate/',
+      endpoint: ENDPOINT.AUTH,
       method: METHOD.POST,
       body: action.payload
     })
 
-    yield requestInfo(getUserInfo(data.token))
-
-    yield put(
-      authorizationSuccess({
-        token: data.token
-        // id: data._id,
-        // email: data.email,
-        // username: data.username,
-        // permission: data.permission,
-        // regDate: new Date(data.registration_date)
-      })
-    )
-    yield put(push('/account'))
+    yield requestInfo(UserInfoRequest(data.token))
+    yield put(walletRequest(data.token))
+    yield put(authorizationSuccess({ token: data.token }))
   } catch (error) {
     yield put(authorizationFailure())
   }
 }
 
-function* requestInfo(action: GetUserInfoAction) {
+function* requestInfo(action: UserInfoRequestAction) {
   try {
     const { data } = yield call(fetchAPI, {
-      path: 'users/current/',
+      endpoint: ENDPOINT.INFO,
       token: action.payload.token
     })
 
-    console.log(data)
+    yield put(
+      UserInfoSuccess({
+        id: data._id,
+        email: data.email,
+        username: data.username,
+        password: data.password,
+        permission: data.permission,
+        regDate: new Date(data.registration_date)
+      })
+    )
   } catch (error) {}
 }
 

@@ -10,3 +10,10 @@ export enum METHOD {
   PUT = 'put',
   DELETE = 'delete'
 }
+
+export const ENDPOINT = {
+  AUTH: '/jwt_auth/authenticate',
+  REG: '/users/register',
+  INFO: '/users/current',
+  WALLET: '/bank_accounts/current'
+}

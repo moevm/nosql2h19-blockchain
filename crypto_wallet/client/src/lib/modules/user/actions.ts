@@ -18,18 +18,26 @@ export interface AuthorizationRequestAction extends Action<TYPES.AUTH_REQUEST> {
 }
 
 export interface AuthorizationSuccessAction extends Action<TYPES.AUTH_SUCCESS> {
-  payload: Data.User
+  payload: {
+    token: string
+  }
 }
 
 export interface AuthorizationFailureAction extends Action<TYPES.AUTH_FAILURE> {
   error: string
 }
 
-export interface GetUserInfoAction extends Action<TYPES.GET_USER_INFO> {
+export interface UserInfoRequestAction extends Action<TYPES.USER_INFO_REQUEST> {
   payload: {
     token: string
   }
 }
+
+export interface UserInfoSuccessAction extends Action<TYPES.USER_INFO_SUCCESS> {
+  payload: Data.User
+}
+
+export interface UserInfoFailureAction extends Action<TYPES.USER_INFO_FAILURE> {}
 
 export type ActionTypes =
   | RegistrationRequestAction
@@ -38,7 +46,9 @@ export type ActionTypes =
   | AuthorizationRequestAction
   | AuthorizationSuccessAction
   | AuthorizationFailureAction
-  | GetUserInfoAction
+  | UserInfoRequestAction
+  | UserInfoSuccessAction
+  | UserInfoFailureAction
 
 // Registration
 export const registrationRequest: ActionCreator<RegistrationRequestAction> = (
@@ -68,11 +78,11 @@ export const authorizationRequest: ActionCreator<AuthorizationRequestAction> = (
   payload
 })
 
-export const authorizationSuccess: ActionCreator<AuthorizationSuccessAction> = (
-  payload: Data.User
-) => ({
+export const authorizationSuccess: ActionCreator<AuthorizationSuccessAction> = (token: string) => ({
   type: TYPES.AUTH_SUCCESS,
-  payload
+  payload: {
+    token
+  }
 })
 
 export const authorizationFailure: ActionCreator<AuthorizationFailureAction> = (error: string) => ({
@@ -80,9 +90,15 @@ export const authorizationFailure: ActionCreator<AuthorizationFailureAction> = (
   error
 })
 
-export const getUserInfo: ActionCreator<GetUserInfoAction> = token => ({
-  type: TYPES.GET_USER_INFO,
+// user info
+export const UserInfoRequest: ActionCreator<UserInfoRequestAction> = token => ({
+  type: TYPES.USER_INFO_REQUEST,
   payload: {
     token
   }
+})
+
+export const UserInfoSuccess: ActionCreator<UserInfoSuccessAction> = (payload: Data.User) => ({
+  type: TYPES.USER_INFO_SUCCESS,
+  payload
 })

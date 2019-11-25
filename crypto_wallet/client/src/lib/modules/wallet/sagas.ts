@@ -1,19 +1,20 @@
 import { put, call, takeLatest, all } from 'redux-saga/effects'
 
 import fetchAPI from 'lib/services/fetchAPI'
-import { METHOD } from 'constants/api'
-import { WalletRequestAction } from './actions'
+import { METHOD, ENDPOINT } from 'constants/api'
+import { WalletRequestAction, walletSuccess, walletFailure } from './actions'
 import TYPES from './types'
 
 function* requestWallet(action: WalletRequestAction) {
   try {
     const { data } = yield call(fetchAPI, {
-      path: `users/${action.payload}/wallet/`
+      endpoint: ENDPOINT.WALLET,
+      token: action.payload.token
     })
 
-    console.log(data)
+    yield put(walletSuccess())
   } catch (error) {
-    console.error(error)
+    yield put(walletFailure())
   }
 }
 

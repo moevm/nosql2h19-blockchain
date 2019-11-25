@@ -1,16 +1,16 @@
 {
-  "client.js": "/static//client.5e1b93e2c7119b301271.js",
-  "pages/Account.js": "/static//pages/Account.a69fab86b34319dc4b14.js",
-  "pages/Authorization.js": "/static//pages/Authorization.0d09981d7f4ace0a59a9.js",
-  "pages/Index.js": "/static//pages/Index.83e432d346027e572140.js",
-  "pages/NotFound.js": "/static//pages/NotFound.53aa4f03d196bee4f28e.js",
-  "pages/Registration.js": "/static//pages/Registration.4a7b3d4b62a7a8986cc6.js",
-  "vendors~pages/Index.js": "/static//vendors~pages/Index.f86af36ea39b30c5642e.js",
+  "client.js": "/static//client.212d9df166bbc20c1c5b.js",
+  "pages/Account.js": "/static//pages/Account.68e988e4ba87646647b0.js",
+  "pages/Authorization.js": "/static//pages/Authorization.71802f11a376f2dcdfc8.js",
+  "pages/Index.js": "/static//pages/Index.fe718903f71b3770c454.js",
+  "pages/NotFound.js": "/static//pages/NotFound.00631a8a3572fa440b75.js",
+  "pages/Registration.js": "/static//pages/Registration.3d438297b1f4bfa206a3.js",
+  "vendors~pages/Index.js": "/static//vendors~pages/Index.a1d86f29cf74cfa41e36.js",
   "assets/images/background.svg": "/static//assets/images/1510d37e08a3f182dcf0d78630e0f4d5.svg",
-  "client.5e1b93e2c7119b301271.js.gz": "/static//client.5e1b93e2c7119b301271.js.gz",
+  "client.212d9df166bbc20c1c5b.js.gz": "/static//client.212d9df166bbc20c1c5b.js.gz",
   "index.html": "/static//index.html",
-  "pages/Account.a69fab86b34319dc4b14.js.gz": "/static//pages/Account.a69fab86b34319dc4b14.js.gz",
-  "pages/Authorization.0d09981d7f4ace0a59a9.js.gz": "/static//pages/Authorization.0d09981d7f4ace0a59a9.js.gz",
-  "pages/Registration.4a7b3d4b62a7a8986cc6.js.gz": "/static//pages/Registration.4a7b3d4b62a7a8986cc6.js.gz",
-  "vendors~pages/Index.f86af36ea39b30c5642e.js.gz": "/static//vendors~pages/Index.f86af36ea39b30c5642e.js.gz"
+  "pages/Account.68e988e4ba87646647b0.js.gz": "/static//pages/Account.68e988e4ba87646647b0.js.gz",
+  "pages/Authorization.71802f11a376f2dcdfc8.js.gz": "/static//pages/Authorization.71802f11a376f2dcdfc8.js.gz",
+  "pages/Registration.3d438297b1f4bfa206a3.js.gz": "/static//pages/Registration.3d438297b1f4bfa206a3.js.gz",
+  "vendors~pages/Index.a1d86f29cf74cfa41e36.js.gz": "/static//vendors~pages/Index.a1d86f29cf74cfa41e36.js.gz"
 }
