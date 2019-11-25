@@ -1,16 +1,11 @@
 {
-  "client.js": "/static//client.212d9df166bbc20c1c5b.js",
-  "pages/Account.js": "/static//pages/Account.68e988e4ba87646647b0.js",
-  "pages/Authorization.js": "/static//pages/Authorization.71802f11a376f2dcdfc8.js",
-  "pages/Index.js": "/static//pages/Index.fe718903f71b3770c454.js",
-  "pages/NotFound.js": "/static//pages/NotFound.00631a8a3572fa440b75.js",
-  "pages/Registration.js": "/static//pages/Registration.3d438297b1f4bfa206a3.js",
-  "vendors~pages/Index.js": "/static//vendors~pages/Index.a1d86f29cf74cfa41e36.js",
-  "assets/images/background.svg": "/static//assets/images/1510d37e08a3f182dcf0d78630e0f4d5.svg",
-  "client.212d9df166bbc20c1c5b.js.gz": "/static//client.212d9df166bbc20c1c5b.js.gz",
-  "index.html": "/static//index.html",
-  "pages/Account.68e988e4ba87646647b0.js.gz": "/static//pages/Account.68e988e4ba87646647b0.js.gz",
-  "pages/Authorization.71802f11a376f2dcdfc8.js.gz": "/static//pages/Authorization.71802f11a376f2dcdfc8.js.gz",
-  "pages/Registration.3d438297b1f4bfa206a3.js.gz": "/static//pages/Registration.3d438297b1f4bfa206a3.js.gz",
-  "vendors~pages/Index.a1d86f29cf74cfa41e36.js.gz": "/static//vendors~pages/Index.a1d86f29cf74cfa41e36.js.gz"
+  "client.js": "//client.0e49f3cc3ab30b2772fc.js",
+  "pages/Account.js": "//pages/Account.dc66c1c6ed8b89cd1f61.js",
+  "pages/Authorization.js": "//pages/Authorization.cb0f8b09f8f3bfbeca33.js",
+  "pages/Index.js": "//pages/Index.edabc2e4be5b10bb981f.js",
+  "pages/NotFound.js": "//pages/NotFound.ee35082ad097e2b9e2ea.js",
+  "pages/Registration.js": "//pages/Registration.47b5a67b5e0098eede31.js",
+  "vendors~pages/Index.js": "//vendors~pages/Index.4863c514ded5bf8b6940.js",
+  "assets/images/background.svg": "//assets/images/background.svg",
+  "index.html": "//index.html"
 }

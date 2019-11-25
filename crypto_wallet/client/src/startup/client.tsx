@@ -16,6 +16,7 @@ const renderApp = (Component: ComponentType<AppOuterProps>, router: Router) => {
   )
 }
 const router = cloneRouter(RouterManager.getInstance())
+console.log(router)
 
 router.usePlugin(browserPlugin())
 router.start(window.location.pathname, (err, state) => {

@@ -69,7 +69,7 @@ function* requestInfo(action: UserInfoRequestAction) {
   } catch (error) {}
 }
 
-export function* watcher() {
+export default function* watcher() {
   yield all([
     takeLatest(TYPES.REG_REQUEST, requestRegistration),
     takeLatest(TYPES.AUTH_REQUEST, requestAuthorization)

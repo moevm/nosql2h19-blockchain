@@ -18,6 +18,6 @@ function* requestWallet(action: WalletRequestAction) {
   }
 }
 
-export function* watcher() {
+export default function* watcher() {
   yield all([takeLatest(TYPES.WALLET_REQUEST, requestWallet)])
 }

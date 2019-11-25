@@ -26,6 +26,6 @@ function* requestData() {
   }
 }
 
-export function* watcher() {
+export default function* watcher() {
   yield all([takeLatest(TYPES.DATA_REQUEST, requestData)])
 }
