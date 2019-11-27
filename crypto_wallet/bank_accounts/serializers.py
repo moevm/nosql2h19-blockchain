@@ -5,6 +5,13 @@ from crypto_wallet_server.database import db, to_mongo, get_bank_account
 class BankAccountSerializer(serializers.Serializer):
     _id = serializers.UUIDField(read_only=True)
     user_id = serializers.CharField(required=True)
+    keypair = serializers.JSONField(read_only=True)
+    btc = serializers.IntegerField()
+    eth = serializers.IntegerField()
+    ltc = serializers.IntegerField()
+    usd = serializers.IntegerField()
+    rub = serializers.IntegerField()
+    gbr = serializers.IntegerField()
 
     class Meta:
         fields = ['_id', 'user_id']

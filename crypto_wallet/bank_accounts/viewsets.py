@@ -9,7 +9,7 @@ from rest_framework.permissions import (
 )
 from pymongo.errors import OperationFailure
 
-from crypto_wallet_server.database import db, to_python, get_bank_account
+from crypto_wallet_server.database import db, to_python, get_bank_account, to_mongo
 
 
 class BankAccountViewSet(viewsets.ViewSet):
@@ -54,10 +54,15 @@ class BankAccountViewSet(viewsets.ViewSet):
         return Response(data=bank_account, status=status.HTTP_200_OK)
 
 
-    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated,])
+    @action(detail=False, methods=['post'], permission_classes=[])
     def send(self, request):
         pass
 
-    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated,])
+    @action(detail=False, methods=['post'], permission_classes=[])
     def popup(self, request):
-        pass
+        user_id = request.user['_id']
+        db.bank_accounts.update_one(
+            {'user_id': user_id},
+            {'$inc': request.data}
+        )
+        return Response(status=status.HTTP_200_OK)
