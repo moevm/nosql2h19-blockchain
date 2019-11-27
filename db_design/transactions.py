@@ -63,7 +63,7 @@ def make_transaction(owner, new_owner, transaction_asset, transaction_asset_meta
 #     fulfilled_transfer_tx['inputs'][0]['owners_before'][0] == owner.public_key)
 
 ######################### usage example #############################
-owner, new_owner = generate_keypair(), generate_keypair()
+owner, new_owner =  (), generate_keypair()
 
 for i in range(2):
     transaction_asset = {
@@ -76,5 +76,12 @@ for i in range(2):
     transaction_asset_metadata = {
         "date" : datetime.utcnow().isoformat(),
     }
+
+    # owner is key_pair. For creatin key_pair class use
+    '''
+        from collections import namedtuple
+        CryptoKeypair = namedtuple('CryptoKeypair', ('private_key', 'public_key'))
+        a = CryptoKeypair("sdsd", "dfdff")
+    '''
 
     make_transaction(owner, new_owner, transaction_asset, transaction_asset_metadata)

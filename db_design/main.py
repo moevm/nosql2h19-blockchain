@@ -13,8 +13,11 @@ import currencies_list_api as curr_l
 client = pymongo.MongoClient(
     "mongodb+srv://akuma:akuma555@blockchain-60374.gcp.mongodb.net/test?retryWrites=true&w=majority"
 )
-
 db = client["wallet"]
+
+# client = pymongo.MongoClient('localhost', 27017)
+# db = client["bigchain"]
+
 # users_collection = db["users"]
 # accounts_collection = db["bank_accounts"]
 
@@ -28,16 +31,16 @@ admin = {
 
 permition_list = { "user", "admin"}
 
-# # MAKE DB CODE
+# MAKE DB CODE
 
-# #setup db for unique logins
-# users_api.setup_collection_users(db)
-# #create admin account
-# db.users.insert_one(admin)
-# #add new users
-# users_list = users_api.generate_users_data()
-# for user in users_list:
-#     users_api.add_new_user(db, user)
+#setup db for unique logins
+users_api.setup_collection_users(db)
+#create admin account
+db.users.insert_one(admin)
+#add new users
+users_list = users_api.generate_users_data()
+for user in users_list:
+    users_api.add_new_user(db, user)
 
 # setup bitcoin_price collection
 # btc_p.setup_collection_bitcoin_price(db)

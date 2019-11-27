@@ -2,6 +2,8 @@ import pymongo
 import json
 import random
 from datetime import date, datetime
+from bigchaindb_driver.crypto import generate_keypair
+
 
 def get_users_from_file():
     with open("data_src/names", 'r') as file:
@@ -15,7 +17,7 @@ def generate_users_data():
         username = "_".join(user.split(" "))
         list_users.append(
             {
-                "username"         : username,
+                "username"          : username,
                 "password"          : "".join(random.choices("qwertyuiopasdfghjklzxcvbnm1234567890", k=8)),
                 "email"             : username + "@gmail.com",
                 "permission"        : "user",
@@ -31,7 +33,21 @@ def add_new_user(db, user):
     insereted_user = db.users.insert_one(user)
     if insereted_user.acknowledged:
         print("The user added successful")
-        init_bank_account = {"user_id" : insereted_user.inserted_id}
+        keypair = generate_keypair()
+        init_bank_account = {
+            "user_id" : insereted_user.inserted_id,
+            "btc"     : 0,
+            "eth"     : 0,
+            "ltc"     : 0,
+            "usd"     : 0,
+            "rub"     : 0,
+            "gbr"     : 0,
+            "keypair" :
+                {
+                    "public_key"    : keypair.public_key,
+                    "private_key"   : keypair.private_key
+                }
+        }
         db.bank_accounts.insert_one(init_bank_account)
     else:
         print("The user was not add")
