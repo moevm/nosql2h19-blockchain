@@ -10,35 +10,34 @@ import styles from './styles'
 interface OuterProps {}
 
 interface StateProps {
-  currency: string
-  xCoord: string[]
-  yCoord: string[]
+  currency: Data.Chart['currency']
+  points: Data.Chart['points']
 }
 
 interface DispatchProps {
-  requestData: () => void
+  requestData: (currency: string) => void
 }
 
 interface Props extends OuterProps, StateProps, DispatchProps, JSSProps<typeof styles> {}
 
-const Graphic: FC<Props> = ({ classes, currency, xCoord, yCoord, requestData }) => {
+const Graphic: FC<Props> = ({ classes, currency, points, requestData }) => {
   useEffect(() => {
-    requestData()
-  }, [currency])
+    requestData('BTC')
+  }, [])
 
   return (
     <div className={classes.wrapper}>
       <ReactEcharts
         option={{
           xAxis: {
-            data: xCoord
+            data: points.x
           },
           yAxis: {
             type: 'value'
           },
           series: [
             {
-              data: yCoord,
+              data: points.y,
               type: 'line'
             }
           ]
@@ -50,12 +49,11 @@ const Graphic: FC<Props> = ({ classes, currency, xCoord, yCoord, requestData }) 
 
 const mapStateToProps: MapStateToProps<StateProps, Props, App.State> = state => ({
   currency: state.chart.currency,
-  xCoord: state.chart.x,
-  yCoord: state.chart.y
+  points: state.chart.points
 })
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, Props> = dispatch => ({
-  requestData: () => dispatch(dataRequest())
+  requestData: currency => dispatch(dataRequest(currency))
 })
 
 export default compose<Props, OuterProps>(

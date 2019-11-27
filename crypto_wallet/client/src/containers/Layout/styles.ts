@@ -32,7 +32,8 @@ const styles: App.Styles<{}> = theme => ({
     width: '100%',
     height: '100%',
     padding: '0 calc(50% - 640px)',
-    backgroundImage: `url("${bgImage}")`
+    backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url("${bgImage}")`,
+    backgroundSize: 'cover'
   }
 })
 

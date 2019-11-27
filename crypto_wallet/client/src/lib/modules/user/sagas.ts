@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux'
+import { actions } from 'redux-router5'
 import { put, call, takeLatest, all, select } from 'redux-saga/effects'
 
 import fetchAPI from 'lib/services/fetchAPI'
@@ -9,11 +9,12 @@ import {
   registrationSuccess,
   registrationFailure,
   AuthorizationRequestAction,
+  authorizationRequest,
   authorizationSuccess,
   authorizationFailure,
   UserInfoRequestAction,
-  UserInfoRequest,
-  UserInfoSuccess
+  userInfoRequest,
+  userInfoSuccess
 } from './actions'
 import TYPES from './types'
 
@@ -27,8 +28,15 @@ function* requestRegistration(action: RegistrationRequestAction) {
       body: { ...action.payload, registration_date: new Date(), permission: 'user' }
     })
 
+    yield requestAuthorization(
+      authorizationRequest({
+        username: action.payload.username,
+        password: action.payload.password
+      })
+    )
     yield put(registrationSuccess())
   } catch (error) {
+    console.log(error.status)
     yield put(registrationFailure())
   }
 }
@@ -41,7 +49,7 @@ function* requestAuthorization(action: AuthorizationRequestAction) {
       body: action.payload
     })
 
-    yield requestInfo(UserInfoRequest(data.token))
+    yield requestInfo(userInfoRequest(data.token))
     yield put(walletRequest(data.token))
     yield put(authorizationSuccess({ token: data.token }))
   } catch (error) {
@@ -57,7 +65,7 @@ function* requestInfo(action: UserInfoRequestAction) {
     })
 
     yield put(
-      UserInfoSuccess({
+      userInfoSuccess({
         id: data._id,
         email: data.email,
         username: data.username,
@@ -66,6 +74,7 @@ function* requestInfo(action: UserInfoRequestAction) {
         regDate: new Date(data.registration_date)
       })
     )
+    yield put(actions.navigateTo('account'))
   } catch (error) {}
 }
 

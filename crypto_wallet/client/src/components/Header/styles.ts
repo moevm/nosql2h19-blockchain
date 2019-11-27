@@ -15,7 +15,7 @@ const styles = (theme: App.Theme) => ({
     marginRight: 'auto'
   },
   logoImage: {},
-  signAnchor: {
+  anchor: {
     position: 'relative',
     display: 'block',
     width: 70,
@@ -36,11 +36,15 @@ const styles = (theme: App.Theme) => ({
     //   transform: 'skew(-25deg)'
     // }
   },
+  accountAnchor: {
+    extend: 'anchor'
+  },
+  anchorWrapper: {},
   signInAnchor: {
-    extend: 'signAnchor'
+    extend: 'anchor'
   },
   signUpAnchor: {
-    extend: 'signAnchor',
+    extend: 'anchor',
     marginLeft: 50
   }
 })

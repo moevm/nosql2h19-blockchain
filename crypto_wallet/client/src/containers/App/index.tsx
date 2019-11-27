@@ -7,15 +7,16 @@ import { RouterProvider } from 'react-router5'
 import { Provider } from 'react-redux'
 
 import { defaultTheme, muiDefaultTheme } from 'lib/theme'
-import store from 'lib/modules/store/store'
+// import store from 'lib/modules/store/store'
 import Router from 'containers/Router'
 
 export interface OuterProps {
   router: Router5
+  store: any
 }
 interface Props extends OuterProps {}
 
-const App: FC<Props> = ({ router }: Props) => {
+const App: FC<Props> = ({ router, store }: Props) => {
   return (
     <Provider store={store}>
       <MUIThemeProvider theme={muiDefaultTheme}>

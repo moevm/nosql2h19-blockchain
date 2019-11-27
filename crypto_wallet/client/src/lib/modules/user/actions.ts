@@ -91,14 +91,14 @@ export const authorizationFailure: ActionCreator<AuthorizationFailureAction> = (
 })
 
 // user info
-export const UserInfoRequest: ActionCreator<UserInfoRequestAction> = token => ({
+export const userInfoRequest: ActionCreator<UserInfoRequestAction> = token => ({
   type: TYPES.USER_INFO_REQUEST,
   payload: {
     token
   }
 })
 
-export const UserInfoSuccess: ActionCreator<UserInfoSuccessAction> = (payload: Data.User) => ({
+export const userInfoSuccess: ActionCreator<UserInfoSuccessAction> = (payload: Data.User) => ({
   type: TYPES.USER_INFO_SUCCESS,
   payload
 })

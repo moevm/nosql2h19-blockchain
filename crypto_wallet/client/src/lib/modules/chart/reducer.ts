@@ -3,26 +3,22 @@ import { Reducer } from 'redux'
 import TYPES from './types'
 import { ActionTypes } from './actions'
 
-export interface ChartState {
-  currency: string
-  x: string[]
-  y: string[]
-  // cache: Map<string, 
-}
+export type ChartState = Data.Chart
 
 const initialState: ChartState = {
-  currency: 'BTC',
-  x: [],
-  y: []
+  currency: '',
+  points: {
+    x: [],
+    y: []
+  },
+  cache: []
+  // cache: new Map<string, Data.Points>()
 }
 
 const reducer: Reducer<ChartState, ActionTypes> = (state = initialState, action) => {
   switch (action.type) {
     case TYPES.DATA_SUCCESS: {
       return { ...state, ...action.payload }
-    }
-    case TYPES.CURRENCY_CHANGE: {
-      return { ...state, currency: action.payload }
     }
     default:
       return state

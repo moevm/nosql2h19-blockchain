@@ -3,7 +3,7 @@ import withStyles, { JSSProps } from 'react-jss'
 import { connect, MapDispatchToProps } from 'react-redux'
 
 import compose from 'lib/utils/compose'
-import { currencyChange } from 'lib/modules/chart/actions'
+import { dataRequest } from 'lib/modules/chart/actions'
 import styles from './styles'
 
 interface OuterProps {}
@@ -42,7 +42,7 @@ const Menu: FC<Props> = ({ classes, changeCurrency }) => {
 }
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, Props> = dispatch => ({
-  changeCurrency: currency => dispatch(currencyChange(currency))
+  changeCurrency: currency => dispatch(dataRequest(currency))
 })
 
 export default compose<Props, OuterProps>(

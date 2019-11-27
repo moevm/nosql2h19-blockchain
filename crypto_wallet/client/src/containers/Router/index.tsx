@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import { constants, Router, SubscribeState } from 'router5'
-import { routeNode } from 'react-router5'
+// import { routeNode } from 'react-router5'
+import { createRouteNodeSelector } from 'redux-router5'
 
 import compose from 'utils/compose'
 import getRouteComponent from 'utils/getRouteComponent'
@@ -34,4 +36,4 @@ class AppRouter extends PureComponent<Props, State> {
   }
 }
 
-export default compose<Props, OuterProps>(routeNode(''))(AppRouter)
+export default compose<Props, OuterProps>(connect(createRouteNodeSelector('')))(AppRouter)
