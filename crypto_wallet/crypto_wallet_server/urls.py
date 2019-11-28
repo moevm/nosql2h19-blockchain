@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html'), name='base'),
     path('login', TemplateView.as_view(template_name='index.html'), name='base'),
+    path('register', TemplateView.as_view(template_name='index.html'), name='base'),
+    path('wallet', TemplateView.as_view(template_name='index.html'), name='base'),
     path('api/v0/jwt_auth/', include('rest_framework_jwt.urls')),
     path('api/v0/users/', include('users.urls')),
     path('api/v0/currencies/', include('currencies.urls')),

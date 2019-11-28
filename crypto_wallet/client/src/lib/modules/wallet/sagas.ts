@@ -12,11 +12,13 @@ import {
 } from './actions'
 import TYPES from './types'
 
-export function* requestWalletSaga(action: WalletRequestAction) {
+export function* requestWalletSaga() {
   try {
+    const token = yield select(tokenSelector)
+
     let { data } = yield call(fetchAPI, {
       endpoint: ENDPOINT.WALLET,
-      token: action.payload.token
+      token
     })
 
     data = Object.entries(data).filter(item => item[0].length === 3 && item[0] !== '_id')
@@ -29,7 +31,6 @@ export function* requestWalletSaga(action: WalletRequestAction) {
 function* sendMoney(action: MoneySendRequestAction) {
   try {
     const token = yield select(tokenSelector)
-    console.log(token)
 
     const { data } = yield call(fetchAPI, {
       endpoint: ENDPOINT.SEND,
@@ -37,7 +38,8 @@ function* sendMoney(action: MoneySendRequestAction) {
       method: METHOD.POST,
       body: action.payload
     })
-    console.log(data)
+
+    yield requestWalletSaga()
     yield put(moneySendSuccess())
   } catch (error) {}
 }

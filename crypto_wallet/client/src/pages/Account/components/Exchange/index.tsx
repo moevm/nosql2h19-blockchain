@@ -23,8 +23,8 @@ interface Props extends OuterProps, DispatchProps, JSSProps<typeof styles> {}
 
 const Exchange: FC<Props> = ({ classes, sendMoney }) => {
   const [exchange, setExchange] = useState<Data.Exchange>({
-    receiver: '',
-    remit: [{ currency: 'BTC', amount: 0 }]
+    receiver: 'Irene_Powers',
+    remits: [{ currency: 'btc', amount: 1 }]
   })
 
   const onButtonClick = () => {
@@ -48,11 +48,11 @@ const Exchange: FC<Props> = ({ classes, sendMoney }) => {
         className={classes.input}
         text="Value"
         placeholder="0"
-        value={exchange.remit[0].amount}
+        value={exchange.remits[0].amount}
         onChange={e =>
           setExchange({
             ...exchange,
-            remit: [{ currency: 'BTC', amount: parseFloat(e.target.value) }]
+            remits: [{ currency: 'btc', amount: parseFloat(e.target.value) }]
           })
         }
       />
