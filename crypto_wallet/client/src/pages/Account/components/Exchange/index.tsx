@@ -21,14 +21,29 @@ interface DispatchProps {
 
 interface Props extends OuterProps, DispatchProps, JSSProps<typeof styles> {}
 
+interface State {
+  username: string
+  currency: string
+  count: string
+}
+
 const Exchange: FC<Props> = ({ classes, sendMoney }) => {
-  const [exchange, setExchange] = useState<Data.Exchange>({
-    receiver: 'Irene_Powers',
-    remits: [{ currency: 'btc', amount: 1 }]
+  const [exchange, setExchange] = useState<State>({
+    username: 'Irene_Powers',
+    currency: '',
+    count: ''
   })
 
   const onButtonClick = () => {
-    sendMoney(exchange)
+    sendMoney({
+      receiver: exchange.username,
+      remits: [
+        {
+          currency: exchange.currency.toLocaleLowerCase(),
+          amount: parseFloat(exchange.count)
+        }
+      ]
+    })
   }
 
   return (
@@ -40,19 +55,32 @@ const Exchange: FC<Props> = ({ classes, sendMoney }) => {
         className={classes.input}
         text="Receiver"
         placeholder="username"
-        value={exchange.receiver}
-        onChange={e => setExchange({ ...exchange, receiver: e.target.value })}
+        value={exchange.username}
+        onChange={e => setExchange({ ...exchange, username: e.target.value })}
+      />
+
+      <CurrencyInput
+        className={classes.input}
+        text="Currency"
+        placeholder="currencty"
+        value={exchange.currency}
+        onChange={e =>
+          setExchange({
+            ...exchange,
+            currency: e.target.value
+          })
+        }
       />
 
       <CurrencyInput
         className={classes.input}
         text="Value"
         placeholder="0"
-        value={exchange.remits[0].amount}
+        value={exchange.count}
         onChange={e =>
           setExchange({
             ...exchange,
-            remits: [{ currency: 'btc', amount: parseFloat(e.target.value) }]
+            count: e.target.value
           })
         }
       />
