@@ -1,11 +1,24 @@
 const styles = (theme: App.Theme) => ({
   container: {
-    height: 100,
-    padding: '0 calc(50% - 640px)',
-    backgroundColor: theme.colors.footer.background
+    padding: '20px calc(50% - 640px)',
+    fontFamily: 'Shell',
+    textAlign: 'right',
+    color: theme.colors.footer.color,
+    backgroundColor: theme.colors.footer.background,
+    boxShadow: 'inset 0 1px 0 #aaa',
+    [theme.breakpoints.down('xl')]: {
+      padding: '20px 50px'
+    }
   },
-  title: {
+  text: {
     margin: 0
+  },
+  list: {
+    margin: 0,
+    padding: 0
+  },
+  item: {
+    listStyle: 'none'
   }
 })
 

@@ -7,11 +7,11 @@ export type UserState = Data.User
 
 const initialState: UserState = {
   token: '',
-  id: '0',
-  email: 'dummy@mail.com',
-  username: 'dummy',
+  id: '',
+  email: '',
+  username: '',
   password: '',
-  permission: 'user',
+  permission: '',
   regDate: new Date()
 }
 

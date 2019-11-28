@@ -5,7 +5,9 @@ import { ActionTypes } from './actions'
 
 export type WalletState = Data.Wallet
 
-const initialState: WalletState = {}
+const initialState: WalletState = {
+  list: []
+}
 
 const reducer: Reducer<WalletState, ActionTypes> = (state = initialState, action) => {
   switch (action.type) {

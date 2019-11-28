@@ -11,8 +11,7 @@ const initialState: ChartState = {
     x: [],
     y: []
   },
-  cache: []
-  // cache: new Map<string, Data.Points>()
+  cache: new Map<string, Data.Points>()
 }
 
 const reducer: Reducer<ChartState, ActionTypes> = (state = initialState, action) => {

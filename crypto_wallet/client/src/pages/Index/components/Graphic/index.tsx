@@ -28,6 +28,7 @@ const Graphic: FC<Props> = ({ classes, currency, points, requestData }) => {
   return (
     <div className={classes.wrapper}>
       <ReactEcharts
+        className={classes.chart}
         option={{
           xAxis: {
             data: points.x

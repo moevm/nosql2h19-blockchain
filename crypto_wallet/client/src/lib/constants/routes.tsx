@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, constants } from 'router5'
 import universal from 'react-universal-component'
 
-import Loading from 'components/Loading'
+// import Loading from 'components/Loading'
 
 export const routes: Route[] = [
   { name: 'index', path: '/' },
@@ -14,7 +14,7 @@ export const routes: Route[] = [
 // @ts-ignore
 const universalRoute = (loadSpec, options = {}) =>
   universal<App.InjectedRouteProps>(loadSpec, {
-    loading: () => <Loading />,
+    // loading: () => <Loading />,
     loadingTransition: false,
     ignoreBabelRename: true,
     ...options
