@@ -5,7 +5,7 @@ import { Link } from 'react-router5'
 
 import compose from 'lib/utils/compose'
 import { MAIN_URL } from 'constants/api'
-// import logo from 'assets/images/logo.svg'
+import logo from 'assets/images/logo.svg'
 import styles from './styles'
 
 interface OuterProps {}
@@ -17,13 +17,17 @@ interface StateProps {
 interface Props extends OuterProps, StateProps, JSSProps<typeof styles> {}
 
 const Header: FC<Props> = ({ classes, username }) => (
-  <header className={classes.container}>
-    <a className={classes.logoAnchor} href={MAIN_URL} aria-label="link to main page">
-      <img className={classes.logoImage} src="" alt="logo image" />
-    </a>
+  <header className={classes.container} aria-label="link to the main page">
+    <Link className={classes.logoAnchor} routeName="index">
+      <img className={classes.logoImage} src={logo} alt="logo image" />
+    </Link>
 
     {username ? (
-      <Link className={classes.accountAnchor} routeName="account" aria-label="">
+      <Link
+        className={classes.accountAnchor}
+        routeName="account"
+        aria-label="link to the user's account"
+      >
         {username}
       </Link>
     ) : (

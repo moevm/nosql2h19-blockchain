@@ -4,6 +4,7 @@ import { put, call, takeLatest, all, select } from 'redux-saga/effects'
 import fetchAPI from 'lib/services/fetchAPI'
 import { METHOD, ENDPOINT } from 'constants/api'
 import { walletRequest } from 'lib/modules/wallet/actions'
+import { requestWalletSaga } from 'lib/modules/wallet/sagas'
 import {
   RegistrationRequestAction,
   registrationSuccess,
@@ -36,7 +37,6 @@ function* requestRegistration(action: RegistrationRequestAction) {
     )
     yield put(registrationSuccess())
   } catch (error) {
-    console.log(error.status)
     yield put(registrationFailure())
   }
 }
@@ -50,7 +50,7 @@ function* requestAuthorization(action: AuthorizationRequestAction) {
     })
 
     yield requestInfo(userInfoRequest(data.token))
-    yield put(walletRequest(data.token))
+    yield requestWalletSaga(walletRequest(data.token))
     yield put(authorizationSuccess({ token: data.token }))
   } catch (error) {
     yield put(authorizationFailure())

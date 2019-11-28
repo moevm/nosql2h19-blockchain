@@ -11,18 +11,26 @@ const colors = {
     submitButton: {
       color: '#fff',
       background: 'transparent',
-      hover: '#323232'
+      hover: {
+        color: '#000',
+        bg: '#fff'
+      }
     }
   },
   header: {
-    background: '#212121',
+    background: 'rgba(255, 255, 255, 0.3)',
     anchor: {
       color: '#000',
-      background: '#fff'
+      background: '#fff',
+      hover: {
+        color: '#fff',
+        bg: '#000'
+      }
     }
   },
   footer: {
-    background: '#212121'
+    color: '#e1e1e1',
+    background: 'rgba(33, 33, 33, 0.5)'
   },
   // pages color
   index: {

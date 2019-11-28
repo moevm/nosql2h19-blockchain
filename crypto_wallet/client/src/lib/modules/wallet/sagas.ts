@@ -5,19 +5,20 @@ import { METHOD, ENDPOINT } from 'constants/api'
 import { WalletRequestAction, walletSuccess, walletFailure } from './actions'
 import TYPES from './types'
 
-function* requestWallet(action: WalletRequestAction) {
+export function* requestWalletSaga(action: WalletRequestAction) {
   try {
-    const { data } = yield call(fetchAPI, {
+    let { data } = yield call(fetchAPI, {
       endpoint: ENDPOINT.WALLET,
       token: action.payload.token
     })
 
-    yield put(walletSuccess())
+    data = Object.entries(data).filter(item => item[0].length === 3 && item[0] !== '_id')
+    yield put(walletSuccess({ list: data }))
   } catch (error) {
     yield put(walletFailure())
   }
 }
 
 export default function* watcher() {
-  yield all([takeLatest(TYPES.WALLET_REQUEST, requestWallet)])
+  yield all([takeLatest(TYPES.WALLET_REQUEST, requestWalletSaga)])
 }

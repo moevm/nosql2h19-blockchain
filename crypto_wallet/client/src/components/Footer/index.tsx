@@ -9,13 +9,18 @@ interface OuterProps {}
 
 interface Props extends OuterProps, JSSProps<typeof styles> {}
 
+const nameArr = ['Черкасова Елена', 'Костин Сергей', 'Серёдкин Дмитрий']
+
 const Footer: FC<Props> = ({ classes }) => (
   <footer className={classes.container}>
-    <h2 className={classes.title}>Footer</h2>
-    <Link routeName="index">Main</Link>
-    <Link routeName="registration">Registration</Link>
-    <Link routeName="authorization">Authorization</Link>
-    <Link routeName="account">Account</Link>
+    <p className={classes.text}>В разработке участвовали:</p>
+    <ul className={classes.list}>
+      {nameArr.map((item, index) => (
+        <li key={index} className={classes.item}>
+          {item}
+        </li>
+      ))}
+    </ul>
   </footer>
 )
 

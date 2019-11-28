@@ -20,6 +20,7 @@ const styles = (theme: App.Theme) => ({
     width: '100%',
     height: 60,
     padding: 0,
+    font: 'inherit',
     color: `${theme.colors.index.menu.button.color}`,
     backgroundColor: `${theme.colors.index.menu.button.background}`,
     border: `1px solid transparent`,

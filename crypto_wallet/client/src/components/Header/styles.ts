@@ -6,7 +6,11 @@ const styles = (theme: App.Theme) => ({
     height: 50,
     padding: '0 calc(50% - 640px)',
     backgroundColor: theme.colors.header.background,
-    zIndex: 1
+    boxShadow: 'inset 0 -1px 0 #ccc',
+    zIndex: 1,
+    [theme.breakpoints.down('xl')]: {
+      padding: '0 50px'
+    }
   },
   title: {
     margin: 0
@@ -14,16 +18,24 @@ const styles = (theme: App.Theme) => ({
   logoAnchor: {
     marginRight: 'auto'
   },
-  logoImage: {},
+  logoImage: {
+    width: 100,
+    height: 50
+  },
   anchor: {
     position: 'relative',
     display: 'block',
-    width: 70,
+    padding: '0 20px',
     lineHeight: '30px',
     color: theme.colors.header.anchor.color,
     textAlign: 'center',
     textDecoration: 'none',
-    backgroundColor: theme.colors.header.anchor.background
+    backgroundColor: theme.colors.header.anchor.background,
+    transition: 'color 0.3s, background-color 0.3s',
+    '&:hover': {
+      color: theme.colors.header.anchor.hover.color,
+      backgroundColor: theme.colors.header.anchor.hover.bg
+    }
     // '&::before': {
     //   content: '""',
     //   position: 'absolute',
@@ -37,15 +49,18 @@ const styles = (theme: App.Theme) => ({
     // }
   },
   accountAnchor: {
-    extend: 'anchor'
+    extend: 'anchor',
+    backgroundColor: 'transparent'
   },
-  anchorWrapper: {},
+  anchorWrapper: {
+    display: 'flex'
+  },
   signInAnchor: {
     extend: 'anchor'
   },
   signUpAnchor: {
     extend: 'anchor',
-    marginLeft: 50
+    marginLeft: 15
   }
 })
 

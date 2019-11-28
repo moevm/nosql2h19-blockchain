@@ -1,7 +1,7 @@
 const styles = (theme: App.Theme) => ({
   wrapper: {
     display: 'grid',
-    gridTemplateColumns: '70% 30%',
+    gridTemplateColumns: '90% 10%',
     alignItems: 'center',
     width: '100%'
   },

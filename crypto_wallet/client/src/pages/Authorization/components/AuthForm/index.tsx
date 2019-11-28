@@ -19,8 +19,8 @@ interface Props extends OuterProps, DispatchProps, JSSProps<typeof styles> {}
 
 const AuthForm: FC<Props> = ({ classes, requestAuthorization }) => {
   const [authForm, setAuthForm] = useState<Data.Authorization>({
-    username: 'Lonnie_Bishop',
-    password: '1xmqm650'
+    username: 'Mae_Flores',
+    password: 'a0bby2eg'
   })
 
   const onButtonClick = () => {
