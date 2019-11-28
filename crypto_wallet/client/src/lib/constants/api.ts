@@ -17,5 +17,5 @@ export const ENDPOINT = {
   INFO: '/users/current',
   WALLET: '/bank_accounts/current',
   SEND: '/bank_accounts/send',
-  POPUP: '/bank_accounts/topup'
+  TOPUP: '/bank_accounts/topup'
 }

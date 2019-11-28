@@ -23,12 +23,17 @@ export interface MoneySendSuccessAction extends Action<TYPES.MONEY_SEND_SUCCESS>
   payload: Data.Wallet
 }
 
+export interface MoneyTopupRequestAction extends Action<TYPES.MONEY_TOPUP_REQUEST> {
+  payload: Data.Topup
+}
+
 export type ActionTypes =
   | WalletRequestAction
   | WalletSuccessAction
   | WalletFailureAction
   | MoneySendRequestAction
   | MoneySendSuccessAction
+  | MoneyTopupRequestAction
 
 export const walletRequest: ActionCreator<WalletRequestAction> = (token: string) => ({
   type: TYPES.WALLET_REQUEST,
@@ -56,5 +61,10 @@ export const moneySendRequest: ActionCreator<MoneySendRequestAction> = (
 
 export const moneySendSuccess: ActionCreator<MoneySendSuccessAction> = (payload: Data.Wallet) => ({
   type: TYPES.MONEY_SEND_SUCCESS,
+  payload
+})
+
+export const moneyTopupRequest: ActionCreator<MoneyTopupRequestAction> = (payload: Data.Topup) => ({
+  type: TYPES.MONEY_TOPUP_REQUEST,
   payload
 })

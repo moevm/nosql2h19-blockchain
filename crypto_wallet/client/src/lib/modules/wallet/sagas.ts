@@ -8,7 +8,8 @@ import {
   walletSuccess,
   walletFailure,
   MoneySendRequestAction,
-  moneySendSuccess
+  moneySendSuccess,
+  MoneyTopupRequestAction
 } from './actions'
 import TYPES from './types'
 
@@ -44,9 +45,26 @@ function* sendMoney(action: MoneySendRequestAction) {
   } catch (error) {}
 }
 
+function* topupMoney(action: MoneyTopupRequestAction) {
+  try {
+    const token = yield select(tokenSelector)
+
+    const { data } = yield call(fetchAPI, {
+      endpoint: ENDPOINT.TOPUP,
+      token,
+      method: METHOD.POST,
+      body: action.payload
+    })
+
+    yield requestWalletSaga()
+    yield put(moneySendSuccess())
+  } catch (error) {}
+}
+
 export default function* watcher() {
   yield all([
     takeLatest(TYPES.WALLET_REQUEST, requestWalletSaga),
-    takeLatest(TYPES.MONEY_SEND_REQUEST, sendMoney)
+    takeLatest(TYPES.MONEY_SEND_REQUEST, sendMoney),
+    takeLatest(TYPES.MONEY_TOPUP_REQUEST, topupMoney)
   ])
 }

@@ -1,11 +1,12 @@
 const styles = (theme: App.Theme) => ({
   wrapper: {
     display: 'grid',
-    gridTemplateRows: '40px 1fr',
+    gridTemplateRows: '40px 1fr 1fr',
     gridTemplateColumns: '3fr 2fr',
     gridTemplateAreas: `
       'user user'
       'exchange money'
+      'topup topup'
     `,
     gridGap: '40px',
     width: '100%',

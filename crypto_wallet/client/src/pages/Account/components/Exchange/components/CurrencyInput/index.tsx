@@ -19,7 +19,7 @@ const CurrencyInput: FC<Props> = ({ classes, className, text, ...props }) => {
     <div className={cn(classes.container, className)}>
       <p className={classes.text}>{text}</p>
       <Input className={classes.input} {...props} />
-      <Select className={classes.select} />
+      {/* <Select className={classes.select} /> */}
     </div>
   )
 }

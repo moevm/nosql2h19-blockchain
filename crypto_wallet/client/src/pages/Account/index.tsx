@@ -7,6 +7,7 @@ import Helmet from 'containers/Helmet'
 import UserInfo from './components/UserInfo'
 import MoneyInfo from './components/MoneyInfo'
 import Exchange from './components/Exchange'
+import Topup from './components/Topup'
 import styles from './styles'
 
 interface OuterProps extends App.InjectedRouteProps {}
@@ -20,6 +21,7 @@ const Account: FC<Props> = ({ classes }) => (
       <UserInfo className={classes.userInfo} />
       <Exchange />
       <MoneyInfo />
+      <Topup />
     </section>
   </Fragment>
 )
