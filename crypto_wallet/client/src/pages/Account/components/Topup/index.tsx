@@ -20,13 +20,20 @@ interface DispatchProps {
 
 interface Props extends OuterProps, DispatchProps, JSSProps<typeof styles> {}
 
+interface State {
+  currnecy: string
+  amount: string
+}
+
 const Topup: FC<Props> = ({ classes, className, topupMoney }) => {
-  const [exchange, setExchange] = useState<Data.Topup>({
-    remits: [{ currency: 'btc', amount: 0 }]
-  })
+  const [exchange, setExchange] = useState<State>({ currnecy: '', amount: '' })
 
   const onButtonClick = () => {
-    topupMoney(exchange)
+    topupMoney({
+      remits: [
+        { currency: exchange.currnecy.toLocaleLowerCase(), amount: parseFloat(exchange.amount) }
+      ]
+    })
   }
 
   return (
@@ -38,17 +45,30 @@ const Topup: FC<Props> = ({ classes, className, topupMoney }) => {
         className={classes.input}
         text="Value"
         placeholder="0"
-        value={exchange.remits[0].amount}
+        value={exchange.amount}
         onChange={e =>
           setExchange({
             ...exchange,
-            remits: [{ currency: 'btc', amount: parseFloat(e.target.value) }]
+            amount: e.target.value
+          })
+        }
+      />
+
+      <CurrencyInput
+        className={classes.input}
+        text="Currency"
+        placeholder="currencty"
+        value={exchange.currnecy}
+        onChange={e =>
+          setExchange({
+            ...exchange,
+            currnecy: e.target.value
           })
         }
       />
 
       <SubmitButton className={classes.button} onSubmitButtonClick={onButtonClick}>
-        Send
+        Topup
       </SubmitButton>
     </Form>
   )
