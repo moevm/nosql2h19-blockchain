@@ -10,7 +10,6 @@ from rest_framework_jwt.compat import get_username_field
 from rest_framework_jwt.settings import api_settings
 
 from crypto_wallet_server.database import get_user
-from users.serializers import UserSerializer
 
 def jwt_get_secret_key(payload=None):
     """
@@ -125,11 +124,10 @@ def jwt_response_payload_handler(token, user=None, request=None):
     def jwt_response_payload_handler(token, user=None, request=None):
         return {
             'token': token,
-            'user': UserSerializer(user, context={'request': request}).data
+            'user': (user, context={'request': request}).data
         }
 
     """
     return {
         'token': token,
-        # 'user': UserSerializer(user, context={'request': request}).data
     }

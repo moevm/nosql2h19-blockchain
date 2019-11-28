@@ -1,87 +1,129 @@
-from .serializers import BankAccountSerializer
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.permissions import (
-    AllowAny,
-    IsAuthenticated,
-    IsAdminUser,
-)
+from rest_framework.permissions import AllowAny
 from pymongo.errors import OperationFailure
 
-from crypto_wallet_server.database import db, to_python, get_bank_account, to_mongo, get_user, encode_value
+from core.base import msg
+from crypto_wallet_server.database import (
+    db,
+    to_mongo,
+    to_python,
+    encode_value,
+    get_bank_account,
+    get_user,
+    result_without_hidden,
+    results_without_hidden,
+
+)
 
 
 class BankAccountViewSet(viewsets.ViewSet):
-    """ Required for the Browsable API renderer to have a nice form. """
-    serializer_class = BankAccountSerializer
+    permission_classes = (AllowAny,)
 
     def list(self, request):
-        bank_accounts = [to_python(b) for b in db.bank_accounts.find()]
-        serializer = BankAccountSerializer(data=bank_accounts, many=True)
-        serializer.is_valid(raise_exception=True)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
-
-
-    def create(self, request):
-        serializer = BankAccountSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        if serializer.save():
-            """calling BankAccountSerializer create(validated_data)"""
-            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            bank_accounts = [to_python(b) for b in db.bank_accounts.find()]
+            bank_accounts = results_without_hidden(
+                results=bank_accounts,
+                hidden=('keypair',)
+            )
+            return Response(data=bank_accounts, status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
     def retrieve(self, request, pk=None):
         bank_account = get_bank_account({'_id': pk})
-        if bank_account is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        return Response(data=bank_account, status=status.HTTP_200_OK)
 
+        if bank_account is not None:
+            bank_account = result_without_hidden(
+                result=bank_account,
+                hidden=('_id', 'user_id', 'keypair')
+            )
+            return Response(data=bank_account, status=status.HTTP_200_OK)
 
-    def update(self, request, pk=None):
-        pass
+        return Response(
+                data=msg('Bank account wasn\'t found'),
+                status=status.HTTP_404_NOT_FOUND)
 
-    def destroy(self, request, pk=None):
-        pass
 
     @action(detail=False, methods=['get'])
     def current(self, request):
         user_id = request.user['_id']
         bank_account = get_bank_account({'user_id': user_id})
-        if bank_account is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        return Response(data=bank_account, status=status.HTTP_200_OK)
+
+        if bank_account is not None:
+            bank_account = result_without_hidden(
+                result=bank_account,
+                hidden=('_id', 'user_id', 'keypair')
+            )
+            return Response(data=bank_account, status=status.HTTP_200_OK)
+
+        return Response(
+            data=msg('Bank account wasn\'t found'),
+            status=status.HTTP_404_NOT_FOUND)
+
 
     @action(detail=False, methods=['post'])
     def send(self, request):
-        user_id = request.user['_id']
-        receiver = get_user({'username': request.data['receiver']})
-        if receiver is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        reduced = {
-            list(request.data['remit'].keys())[0] : -list(request.data['remit'].values())[0]
-        }
-        db.bank_accounts.update_one(
-            {'user_id': encode_value(user_id)},
-            {'$inc': reduced}
-        )
-        db.bank_accounts.update_one(
-            {'user_id': encode_value(receiver['_id'])},
-            {'$inc': request.data['remit']}
-        )
-        bank_account = get_bank_account({'user_id': user_id})
-        return Response(data=bank_account, status=status.HTTP_200_OK)
+        try:
+            sender_id = request.user['_id']
+            receiver = get_user({'username': request.data['receiver']})
+
+            if receiver is None:
+                return Response(
+                    data=msg('Receiver wasn\'t found'),
+                    status=status.HTTP_404_NOT_FOUND)
+
+            sender_bank_account = get_bank_account({'user_id': sender_id})
+
+            topup = {}
+            sended = {}
+            for i, remit in enumerate(request.data['remits']):
+                currency = request.data['remits'][i]['currency']
+                amount = request.data['remits'][i]['amount']
+                if sender_bank_account[currency] < amount:
+                    return Response(
+                        data=msg('Insufficient funds'),
+                        status=status.HTTP_400_BAD_REQUEST)
+                topup[currency] = amount
+                sended[currency] = -amount
+
+            db.bank_accounts.update_one(
+                {'user_id': encode_value(sender_id)},
+                {'$inc': sended})
+
+            db.bank_accounts.update_one(
+                {'user_id': encode_value(receiver['_id'])},
+                {'$inc': topup})
+    
+            return Response(status=status.HTTP_200_OK)
+    
+        except:
+            return Response(
+                data=msg('Check request data'),
+                status=status.HTTP_400_BAD_REQUEST)
+
 
     @action(detail=False, methods=['post'])
-    def popup(self, request):
+    def topup(self, request):
         user_id = request.user['_id']
         user = get_user({'_id': user_id})
-        if user is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        db.bank_accounts.update_one(
-            {'user_id': encode_value(user_id)},
-            {'$inc': request.data}
-        )
-        bank_account = get_bank_account({'user_id': user_id})
-        return Response(data=bank_account, status=status.HTTP_200_OK)
+
+        if user is not None:
+            topup = {}
+            for i, remit in enumerate(request.data['remits']):
+                currency = request.data['remits'][i]['currency']
+                amount = request.data['remits'][i]['amount']
+                topup[currency] = amount
+
+            db.bank_accounts.update_one(
+                {'user_id': encode_value(user_id)},
+                {'$inc': topup})
+            print(topup)
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(
+            data=msg('User wasn\'t found'),
+            status=status.HTTP_404_NOT_FOUND)

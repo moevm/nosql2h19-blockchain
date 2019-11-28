@@ -23,7 +23,6 @@ def to_python(mongo_data):
                 mongo_data[k] = decode_value(v)
     else:
         return decode_value(mongo_data)
-    print(mongo_data)
     return mongo_data
 
 def to_mongo(data):
@@ -49,3 +48,13 @@ def get_bank_account(data):
     if bank_account is not None:
         return to_python(bank_account)
     return None
+
+def result_without_hidden(result, hidden):
+    for key in hidden:
+        result.pop(key, None)
+    return result
+
+def results_without_hidden(results, hidden):
+    for i, result in enumerate(results):
+        results[i] = result_without_hidden(result, hidden)
+    return results
