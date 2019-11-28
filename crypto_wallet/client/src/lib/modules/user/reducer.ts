@@ -20,7 +20,7 @@ const reducer: Reducer<UserState, ActionTypes> = (state = initialState, action) 
     case TYPES.REG_SUCCESS:
       return state
     case TYPES.AUTH_SUCCESS:
-      return { ...state, ...action.payload }
+      return { ...state, token: action.payload }
     case TYPES.USER_INFO_SUCCESS:
       return { ...state, ...action.payload }
     default:

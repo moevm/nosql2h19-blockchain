@@ -15,5 +15,7 @@ export const ENDPOINT = {
   AUTH: '/jwt_auth/authenticate',
   REG: '/users/register',
   INFO: '/users/current',
-  WALLET: '/bank_accounts/current'
+  WALLET: '/bank_accounts/current',
+  SEND: '/bank_accounts/send',
+  POPUP: '/bank_accounts/popup'
 }

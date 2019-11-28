@@ -18,9 +18,7 @@ export interface AuthorizationRequestAction extends Action<TYPES.AUTH_REQUEST> {
 }
 
 export interface AuthorizationSuccessAction extends Action<TYPES.AUTH_SUCCESS> {
-  payload: {
-    token: string
-  }
+  payload: string
 }
 
 export interface AuthorizationFailureAction extends Action<TYPES.AUTH_FAILURE> {
@@ -80,9 +78,7 @@ export const authorizationRequest: ActionCreator<AuthorizationRequestAction> = (
 
 export const authorizationSuccess: ActionCreator<AuthorizationSuccessAction> = (token: string) => ({
   type: TYPES.AUTH_SUCCESS,
-  payload: {
-    token
-  }
+  payload: token
 })
 
 export const authorizationFailure: ActionCreator<AuthorizationFailureAction> = (error: string) => ({

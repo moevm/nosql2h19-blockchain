@@ -1,8 +1,15 @@
-import { put, call, takeLatest, all } from 'redux-saga/effects'
+import { put, call, takeLatest, all, select } from 'redux-saga/effects'
 
 import fetchAPI from 'lib/services/fetchAPI'
 import { METHOD, ENDPOINT } from 'constants/api'
-import { WalletRequestAction, walletSuccess, walletFailure } from './actions'
+import { tokenSelector } from './selectors'
+import {
+  WalletRequestAction,
+  walletSuccess,
+  walletFailure,
+  MoneySendRequestAction,
+  moneySendSuccess
+} from './actions'
 import TYPES from './types'
 
 export function* requestWalletSaga(action: WalletRequestAction) {
@@ -19,6 +26,25 @@ export function* requestWalletSaga(action: WalletRequestAction) {
   }
 }
 
+function* sendMoney(action: MoneySendRequestAction) {
+  try {
+    const token = yield select(tokenSelector)
+    console.log(token)
+
+    const { data } = yield call(fetchAPI, {
+      endpoint: ENDPOINT.SEND,
+      token,
+      method: METHOD.POST,
+      body: action.payload
+    })
+    console.log(data)
+    yield put(moneySendSuccess())
+  } catch (error) {}
+}
+
 export default function* watcher() {
-  yield all([takeLatest(TYPES.WALLET_REQUEST, requestWalletSaga)])
+  yield all([
+    takeLatest(TYPES.WALLET_REQUEST, requestWalletSaga),
+    takeLatest(TYPES.MONEY_SEND_REQUEST, sendMoney)
+  ])
 }

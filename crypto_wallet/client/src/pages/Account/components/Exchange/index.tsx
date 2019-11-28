@@ -1,8 +1,10 @@
 import React, { FC, useState } from 'react'
 import cn from 'classnames'
 import withStyles, { JSSProps } from 'react-jss'
+import { connect, MapDispatchToProps } from 'react-redux'
 
 import compose from 'lib/utils/compose'
+import { moneySendRequest } from 'lib/modules/wallet/actions'
 import Button from 'components/Button'
 import styles from './styles'
 import Form from 'components/Form'
@@ -13,39 +15,63 @@ interface OuterProps {
   className?: string
 }
 
-interface Props extends OuterProps, JSSProps<typeof styles> {}
+interface DispatchProps {
+  sendMoney: (info: Data.Exchange) => void
+}
 
-const Exchange: FC<Props> = ({ classes }) => {
-  const [exchange, setExchange] = useState<Data.Exchange>({ value1: '', value2: '' })
+interface Props extends OuterProps, DispatchProps, JSSProps<typeof styles> {}
 
-  const onButtonClick = () => {}
+const Exchange: FC<Props> = ({ classes, sendMoney }) => {
+  const [exchange, setExchange] = useState<Data.Exchange>({
+    receiver: '',
+    remit: [{ currency: 'BTC', amount: 0 }]
+  })
+
+  const onButtonClick = () => {
+    sendMoney(exchange)
+  }
 
   return (
     <Form className={classes.form}>
-      <h2 className={classes.header}>Exchange</h2>
-      <p className={classes.info}>Select currency pair to exchange</p>
+      <h2 className={classes.header}>Send</h2>
+      <p className={classes.info}>Enter username and value to send currency another user</p>
 
       <CurrencyInput
         className={classes.input}
-        text="I give"
-        placeholder="0"
-        value={exchange.value1}
-        onChange={e => setExchange({ ...exchange, value1: e.target.value })}
+        text="Receiver"
+        placeholder="username"
+        value={exchange.receiver}
+        onChange={e => setExchange({ ...exchange, receiver: e.target.value })}
       />
 
       <CurrencyInput
         className={classes.input}
-        text="I receive"
+        text="Value"
         placeholder="0"
-        value={exchange.value2}
-        onChange={e => setExchange({ ...exchange, value2: e.target.value })}
+        value={exchange.remit[0].amount}
+        onChange={e =>
+          setExchange({
+            ...exchange,
+            remit: [{ currency: 'BTC', amount: parseFloat(e.target.value) }]
+          })
+        }
       />
 
       <SubmitButton className={classes.button} onSubmitButtonClick={onButtonClick}>
-        Exchange
+        Send
       </SubmitButton>
     </Form>
   )
 }
 
-export default compose<Props, OuterProps>(withStyles(styles))(Exchange)
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, Props> = dispatch => ({
+  sendMoney: info => dispatch(moneySendRequest(info))
+})
+
+export default compose<Props, OuterProps>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  withStyles(styles)
+)(Exchange)

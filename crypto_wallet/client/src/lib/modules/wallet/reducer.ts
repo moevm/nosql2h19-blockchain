@@ -13,6 +13,8 @@ const reducer: Reducer<WalletState, ActionTypes> = (state = initialState, action
   switch (action.type) {
     case TYPES.WALLET_SUCCESS:
       return { ...state, ...action.payload }
+    case TYPES.MONEY_SEND_SUCCESS:
+      return state
     default:
       return state
   }

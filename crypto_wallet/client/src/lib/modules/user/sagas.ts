@@ -51,7 +51,7 @@ function* requestAuthorization(action: AuthorizationRequestAction) {
 
     yield requestInfo(userInfoRequest(data.token))
     yield requestWalletSaga(walletRequest(data.token))
-    yield put(authorizationSuccess({ token: data.token }))
+    yield put(authorizationSuccess(data.token))
   } catch (error) {
     yield put(authorizationFailure())
   }

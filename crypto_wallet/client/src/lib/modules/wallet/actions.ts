@@ -15,7 +15,20 @@ export interface WalletFailureAction extends Action<TYPES.WALLET_FAILURE> {
   error: string
 }
 
-export type ActionTypes = WalletRequestAction | WalletSuccessAction | WalletFailureAction
+export interface MoneySendRequestAction extends Action<TYPES.MONEY_SEND_REQUEST> {
+  payload: Data.Exchange
+}
+
+export interface MoneySendSuccessAction extends Action<TYPES.MONEY_SEND_SUCCESS> {
+  payload: Data.Wallet
+}
+
+export type ActionTypes =
+  | WalletRequestAction
+  | WalletSuccessAction
+  | WalletFailureAction
+  | MoneySendRequestAction
+  | MoneySendSuccessAction
 
 export const walletRequest: ActionCreator<WalletRequestAction> = (token: string) => ({
   type: TYPES.WALLET_REQUEST,
@@ -32,4 +45,16 @@ export const walletSuccess: ActionCreator<WalletSuccessAction> = (payload: Data.
 export const walletFailure: ActionCreator<WalletFailureAction> = (error: string) => ({
   type: TYPES.WALLET_FAILURE,
   error
+})
+
+export const moneySendRequest: ActionCreator<MoneySendRequestAction> = (
+  payload: Data.Exchange
+) => ({
+  type: TYPES.MONEY_SEND_REQUEST,
+  payload
+})
+
+export const moneySendSuccess: ActionCreator<MoneySendSuccessAction> = (payload: Data.Wallet) => ({
+  type: TYPES.MONEY_SEND_SUCCESS,
+  payload
 })
