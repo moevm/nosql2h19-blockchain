@@ -26,6 +26,6 @@ urlpatterns = [
     path('wallet', TemplateView.as_view(template_name='index.html'), name='base'),
     path('api/v0/jwt_auth/', include('rest_framework_jwt.urls')),
     path('api/v0/users/', include('users.urls')),
-    path('api/v0/currencies/', include('currencies.urls')),
+    path('api/v0/transactions/', include('transactions.urls')),
     path('api/v0/bank_accounts/', include('bank_accounts.urls')),
 ]

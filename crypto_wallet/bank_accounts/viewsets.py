@@ -2,7 +2,6 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
-from pymongo.errors import OperationFailure
 
 from core.base import msg
 from crypto_wallet_server.database import (
@@ -14,7 +13,6 @@ from crypto_wallet_server.database import (
     get_user,
     result_without_hidden,
     results_without_hidden,
-
 )
 
 
