@@ -1,6 +1,7 @@
 import pymongo
 
 from datetime import date, datetime
+import random
 
 import users_api
 import bank_accounts_api as bnk_api
@@ -33,14 +34,14 @@ permition_list = { "user", "admin"}
 
 # MAKE DB CODE
 
-#setup db for unique logins
-users_api.setup_collection_users(db)
-#create admin account
-db.users.insert_one(admin)
-#add new users
-users_list = users_api.generate_users_data()
-for user in users_list:
-    users_api.add_new_user(db, user)
+# #setup db for unique logins
+# users_api.setup_collection_users(db)
+# #create admin account
+# db.users.insert_one(admin)
+# #add new users
+# users_list = users_api.generate_users_data()
+# for user in users_list:
+#     users_api.add_new_user(db, user)
 
 # setup bitcoin_price collection
 # btc_p.setup_collection_bitcoin_price(db)
@@ -56,5 +57,32 @@ for user in users_list:
 # users_api.add_field_regist_date(db)
 # stat.get_bitcoin_price_statistic()
 # btc_p.add_new_bitcoin_price(db)
+# curr_l.add_currencies(db)
 
-curr_l.add_currencies(db)
+possible_currency = ["btc", "eth", "ltc", "usd", "rub", "gbr"]
+
+def generate_transaction(sender, recipient) :
+    transaction = {
+        "sender"        : sender,
+        "recipient"     : recipient,
+        "currency"      : random.choice(possible_currency),
+        "values"        : random.randrange(10),
+        "date"          : datetime.utcnow().isoformat()
+    }
+
+    return transaction
+
+def gen_ammount_transaction() :
+    cursor = db.bank_accounts.find({})
+    data = list(cursor)
+
+    for curr_user in data:
+        for i in range(random.randint(5, 15)):
+            some_user = random.choice(data)
+            if (some_user["user_id"] != curr_user["user_id"]) :
+                transaction = generate_transaction(curr_user["keypair"]["public_key"], some_user["keypair"]["public_key"])
+                print(transaction)
+                db.transactions.insert_one(transaction)
+
+
+gen_ammount_transaction()

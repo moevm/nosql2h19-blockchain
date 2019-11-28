@@ -1,6 +1,7 @@
 from bigchaindb_driver import BigchainDB
 from bigchaindb_driver.crypto import generate_keypair
 from datetime import date, datetime
+import random
 
 bdb_root_url = "http://localhost:9984"
 
@@ -61,6 +62,8 @@ def make_transaction(owner, new_owner, transaction_asset, transaction_asset_meta
 
 # print("Was Alice the previous owner?",
 #     fulfilled_transfer_tx['inputs'][0]['owners_before'][0] == owner.public_key)
+
+
 
 ######################### usage example #############################
 owner, new_owner =  (), generate_keypair()
