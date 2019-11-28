@@ -48,7 +48,6 @@ class JSONWebTokenAPIView(APIView):
         deserializing input, and for serializing output.
         """
         serializer_class = self.get_serializer_class()
-        print('Serializer_class: ', serializer_class)
         kwargs['context'] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
 

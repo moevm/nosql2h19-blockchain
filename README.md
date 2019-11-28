@@ -2,7 +2,7 @@
 
 
 ## Setup ##
-1. Have Python >= 3.6
+1. Python >= 3.6
 2. Launch ```./deploy``` to prepare project environment.
 
 ## Run ##
@@ -14,12 +14,6 @@ source .env/bin/activate
 ```
 ./crypto_wallet/manage.py runserver
 ```
-##### 3. Setup DB: #####
-```
-./crypto_wallet/manage.py makemigrations
-./crypto_wallet/manage.py migrate
-```
-
 ## Manage MongoDB ##
 #### Access: ####
 - USER = common_user
@@ -34,3 +28,5 @@ https://theholmesoffice.com/how-to-create-a-mongodb-database/
 #### Commands ####
 - use `<db_name>`
 - show collections
+- db.users.find()
+- db.users.find({'username': 'tolik'})

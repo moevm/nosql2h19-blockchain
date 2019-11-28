@@ -44,11 +44,9 @@ class JSONWebTokenSerializer(Serializer):
             self.username_field: attrs.get(self.username_field),
             'password': attrs.get('password')
         }
-        print('Auth credentials: ', credentials)
 
         if all(credentials.values()):
             user = get_user(credentials)
-            print('Authenticated user:', user)
             if user:
                 payload = jwt_payload_handler(user)
 
@@ -101,7 +99,6 @@ class VerificationBaseSerializer(Serializer):
         if user is None:
             msg = _('Invalid signature.')
             raise exceptions.AuthenticationFailed(msg)
-        print('Check user:', user)
         return user
 
 
