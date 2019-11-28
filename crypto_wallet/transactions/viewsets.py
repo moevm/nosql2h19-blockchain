@@ -27,7 +27,15 @@ class TransactionsViewSet(viewsets.ViewSet):
 
 
     @action(detail=False, methods=['get'])
-    def pivot_table(self, request):
+    def pivot_table1(self, request):
         transactions = get_all_transactions()
         df = pd.DataFrame(transactions)
         return Response(data=df,status=status.HTTP_200_OK)
+
+
+    @action(detail=False, methods=['get'])
+    def pivot_table2(self, request):
+        transactions = get_all_transactions(hidden=('_id', 'date', 'sender', 'recipient'))
+        df = pd.DataFrame(transactions)
+        grouped = df.groupby('currency').sum()
+        return Response(data=grouped.to_dict()['values'],status=status.HTTP_200_OK)

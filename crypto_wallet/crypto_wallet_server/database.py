@@ -49,22 +49,16 @@ def get_bank_account(data):
         return to_python(bank_account)
     return None
 
-def get_all_transactions():
+def get_all_transactions(hidden=('_id',)):
     transactions = [to_python(transaction) for transaction in db.transactions.find()]
-    transactions = results_without_hidden(
-        results=transactions,
-        hidden=('_id',)
-    )
+    transactions = results_without_hidden(transactions, hidden)
     return transactions
 
-def get_transactions(data):
+def get_transactions(data, hidden=('_id',)):
     transactions = db.transactions.find(to_mongo(data))
     if transactions is not None:
         transactions = [to_python(transaction) for transaction in transactions]
-        transactions = results_without_hidden(
-            results=transactions,
-            hidden=('_id',)
-        )
+        transactions = results_without_hidden(transactions, hidden)
         return transactions
     return None
 
