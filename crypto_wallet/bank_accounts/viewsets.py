@@ -9,7 +9,7 @@ from rest_framework.permissions import (
 )
 from pymongo.errors import OperationFailure
 
-from crypto_wallet_server.database import db, to_python, get_bank_account, to_mongo
+from crypto_wallet_server.database import db, to_python, get_bank_account, to_mongo, get_user, encode_value
 
 
 class BankAccountViewSet(viewsets.ViewSet):
@@ -45,7 +45,7 @@ class BankAccountViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         pass
 
-    @action(detail=False, methods=['get'], permission_classes=[AllowAny,])
+    @action(detail=False, methods=['get'])
     def current(self, request):
         user_id = request.user['_id']
         bank_account = get_bank_account({'user_id': user_id})
@@ -53,16 +53,35 @@ class BankAccountViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(data=bank_account, status=status.HTTP_200_OK)
 
-
-    @action(detail=False, methods=['post'], permission_classes=[])
+    @action(detail=False, methods=['post'])
     def send(self, request):
-        pass
+        user_id = request.user['_id']
+        receiver = get_user({'username': request.data['receiver']})
+        if receiver is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        reduced = {
+            list(request.data['remit'].keys())[0] : -list(request.data['remit'].values())[0]
+        }
+        db.bank_accounts.update_one(
+            {'user_id': encode_value(user_id)},
+            {'$inc': reduced}
+        )
+        db.bank_accounts.update_one(
+            {'user_id': encode_value(receiver['_id'])},
+            {'$inc': request.data['remit']}
+        )
+        bank_account = get_bank_account({'user_id': user_id})
+        return Response(data=bank_account, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=['post'], permission_classes=[])
+    @action(detail=False, methods=['post'])
     def popup(self, request):
         user_id = request.user['_id']
+        user = get_user({'_id': user_id})
+        if user is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         db.bank_accounts.update_one(
-            {'user_id': user_id},
+            {'user_id': encode_value(user_id)},
             {'$inc': request.data}
         )
-        return Response(status=status.HTTP_200_OK)
+        bank_account = get_bank_account({'user_id': user_id})
+        return Response(data=bank_account, status=status.HTTP_200_OK)
