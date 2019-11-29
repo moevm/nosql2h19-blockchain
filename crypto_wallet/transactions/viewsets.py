@@ -17,12 +17,13 @@ from crypto_wallet_server.database import (
     get_all_transactions,
 )
 
-
 class TransactionsViewSet(viewsets.ViewSet):
     permission_classes = (AllowAny,)
 
     def list(self, request):
         transactions = get_all_transactions()
+        # for i,transaction in enumerate(transactions):
+            # transactions[i]['sender'] = get_user(transaction['sender']).username
         return Response(data=transactions,status=status.HTTP_200_OK)
 
 
@@ -42,7 +43,7 @@ class TransactionsViewSet(viewsets.ViewSet):
 
 
     @action(detail=False, methods=['get'])
-    def chart_data(self, request):
+    def pivot_table3(self, request):
         transactions = get_all_transactions(hidden=('_id', 'date', 'sender', 'recipient'))
         df = pd.DataFrame(transactions)
         df.columns = ['x', 'y']
