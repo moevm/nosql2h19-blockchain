@@ -39,3 +39,11 @@ class TransactionsViewSet(viewsets.ViewSet):
         df = pd.DataFrame(transactions)
         grouped = df.groupby('currency').sum()
         return Response(data=grouped.to_dict()['values'],status=status.HTTP_200_OK)
+
+
+    @action(detail=False, methods=['get'])
+    def chart_data(self, request):
+        transactions = get_all_transactions(hidden=('_id', 'date', 'sender', 'recipient'))
+        df = pd.DataFrame(transactions)
+        df.columns = ['x', 'y']
+        return Response(data=df,status=status.HTTP_200_OK)
