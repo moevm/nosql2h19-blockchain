@@ -32,6 +32,9 @@ const Header: FC<Props> = ({ classes, username }) => (
       </Link>
     ) : (
       <div className={classes.anchorWrapper}>
+        <Link className={classes.signInAnchor} routeName="transactions">
+          Statistics
+        </Link>
         <Link className={classes.signInAnchor} routeName="authorization">
           Sign in
         </Link>

@@ -17,5 +17,7 @@ export const ENDPOINT = {
   INFO: '/users/current',
   WALLET: '/bank_accounts/current',
   SEND: '/bank_accounts/send',
-  TOPUP: '/bank_accounts/topup'
+  TOPUP: '/bank_accounts/topup',
+  TRANSACTIONS_TABLE: '/transactions/pivot_table1',
+  TRANSACTIONS_CHART: '/transactions/pivot_table3'
 }

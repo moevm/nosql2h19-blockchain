@@ -1,1 +1,1 @@
-export const clientRoutes = ['/', '/register', '/login', '/wallet']
+export const clientRoutes = ['/', '/register', '/login', '/wallet', '/transactions']

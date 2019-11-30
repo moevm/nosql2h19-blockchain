@@ -63,6 +63,12 @@ const colors = {
         background: '#f4f6f8'
       }
     }
+  },
+  transactions: {
+    table: {
+      bg: 'rgba(255, 255, 255, 0.7)',
+      border: '#212121'
+    }
   }
 }
 
