@@ -61,10 +61,12 @@ permition_list = { "user", "admin"}
 
 possible_currency = ["btc", "eth", "ltc", "usd", "rub", "gbr"]
 
-def generate_transaction(sender, recipient) :
+def generate_transaction(sender, recipient, sender_id, receiver_id) :
     transaction = {
+        "sender_id"     : sender_id,
+        "receiver_id"   : receiver_id,
         "sender"        : sender,
-        "recipient"     : recipient,
+        "receiver"      : recipient,
         "currency"      : random.choice(possible_currency),
         "values"        : random.randrange(10),
         "date"          : datetime.utcnow().isoformat()
@@ -80,9 +82,22 @@ def gen_ammount_transaction() :
         for i in range(random.randint(5, 15)):
             some_user = random.choice(data)
             if (some_user["user_id"] != curr_user["user_id"]) :
-                transaction = generate_transaction(curr_user["keypair"]["public_key"], some_user["keypair"]["public_key"])
+                transaction = generate_transaction(curr_user["keypair"]["public_key"],
+                                                   some_user["keypair"]["public_key"],
+                                                   curr_user["user_id"],
+                                                   some_user["user_id"])
                 print(transaction)
                 db.transactions.insert_one(transaction)
 
 
-gen_ammount_transaction()
+def get_stat_transactions():
+    count_trans_by_curr = []
+    for curr in possible_currency:
+        count_trans_by_curr.append(db.transactions.find({"currency" : curr}).count())
+    
+    return count_trans_by_curr
+
+# gen_ammount_transaction()
+
+print(get_stat_transactions())
+
