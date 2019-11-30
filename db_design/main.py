@@ -95,7 +95,7 @@ def get_stat_transactions():
     for curr in possible_currency:
         count_trans_by_curr.append(db.transactions.find({"currency" : curr}).count())
     
-    return count_trans_by_curr
+    return dict(zip(possible_currency,count_trans_by_curr))
 
 # gen_ammount_transaction()
 
