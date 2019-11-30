@@ -32,9 +32,7 @@ const styles = (theme: App.Theme) => ({
     body: {
       width: '100%',
       height: '100%',
-      margin: 0,
-      backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url("${bgImage}")`,
-      backgroundSize: 'cover'
+      margin: 0
     },
     '#root': {
       display: 'flex',
@@ -51,6 +49,8 @@ const styles = (theme: App.Theme) => ({
     width: '100%',
     height: '100%',
     padding: '0 calc(50% - 640px)',
+    backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url("${bgImage}")`,
+    backgroundSize: 'cover',
     [theme.breakpoints.down('xl')]: {
       padding: '0 50px'
     }

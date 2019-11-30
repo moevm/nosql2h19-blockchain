@@ -2,6 +2,7 @@ const styles = (theme: App.Theme) => ({
   table: {
     borderCollapse: 'collapse',
     width: '100%',
+    marginBottom: 30,
     backgroundColor: theme.colors.transactions.table.bg,
     '& thead': {
       fontFamily: 'ProximaNovaBold',

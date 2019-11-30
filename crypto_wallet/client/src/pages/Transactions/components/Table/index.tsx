@@ -22,20 +22,28 @@ interface Props extends OuterProps, StateProps, JSSProps<typeof styles> {}
 
 const parseDate = (str: string) => {
   const date = new Date(str)
-  return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+  return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
 }
 
-const Table: FC<Props> = ({ classes, className, currency, date, values, sender, receiver }) => {
+const Table: FC<Props> = ({
+  classes,
+  className,
+  currency,
+  date,
+  values,
+  sender = [],
+  receiver
+}) => {
   const memoTable = useMemo(
     () =>
       !!sender.length &&
       sender.map((sender, i) => (
         <tr key={i}>
-          <th>{`${sender.slice(0, 12)}...`}</th>
-          <th>{`${receiver[i].slice(0, 12)}...`}</th>
+          <th>{`${sender.slice(0, 15)}...`}</th>
+          <th>{`${receiver[i].slice(0, 15)}...`}</th>
           <th>{values[i]}</th>
           <th>{currency[i].toUpperCase()}</th>
-          <th>{parseDate(date[i])}</th>
+          {/* <th>{parseDate(date[i])}</th> */}
         </tr>
       )),
     [sender.length]
@@ -49,7 +57,7 @@ const Table: FC<Props> = ({ classes, className, currency, date, values, sender, 
           <th>Reciever</th>
           <th className={classes.count}>Count</th>
           <th className={classes.currency}>Currency</th>
-          <th>Date</th>
+          {/* <th>Date</th> */}
         </tr>
       </thead>
 

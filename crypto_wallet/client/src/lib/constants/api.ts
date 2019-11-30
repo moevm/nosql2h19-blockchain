@@ -19,5 +19,5 @@ export const ENDPOINT = {
   SEND: '/bank_accounts/send',
   TOPUP: '/bank_accounts/topup',
   TRANSACTIONS_TABLE: '/transactions/pivot_table1',
-  TRANSACTIONS_CHART: '/transactions/pivot_table3'
+  TRANSACTIONS_CHART: '/transactions/pivot_table2'
 }

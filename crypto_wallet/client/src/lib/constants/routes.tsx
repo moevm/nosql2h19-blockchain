@@ -9,7 +9,11 @@ export const routes: Route[] = [
   { name: 'registration', path: '/register' },
   { name: 'authorization', path: '/login' },
   { name: 'account', path: '/wallet' },
-  { name: 'transactions', path: '/transactions' }
+  {
+    name: 'transactions',
+    path: '/transactions',
+    children: [{ name: 'table', path: '/statistics' }, { name: 'chart', path: '/chart' }]
+  }
 ]
 
 // @ts-ignore
@@ -27,5 +31,6 @@ export const routeComponents: { [key: string]: ReturnType<typeof universalRoute>
   authorization: universalRoute(import('../../pages/Authorization')),
   account: universalRoute(import('../../pages/Account')),
   transactions: universalRoute(import('../../pages/Transactions')),
+  // table: universalRoute(import('../../pages/Transactions')),
   [constants.UNKNOWN_ROUTE]: universalRoute(import('../../pages/NotFound'))
 }

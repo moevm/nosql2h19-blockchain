@@ -18,7 +18,7 @@ const colors = {
     }
   },
   header: {
-    background: 'rgba(255, 255, 255, 0.3)',
+    background: '#eee',
     anchor: {
       color: '#000',
       background: '#fff',
@@ -30,7 +30,7 @@ const colors = {
   },
   footer: {
     color: '#e1e1e1',
-    background: 'rgba(33, 33, 33, 0.5)'
+    background: '#222'
   },
   // pages color
   index: {

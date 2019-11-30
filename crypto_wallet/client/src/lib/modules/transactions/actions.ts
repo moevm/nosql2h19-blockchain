@@ -3,19 +3,33 @@ import TYPES from './types'
 
 export interface TransactionsRequestAction extends Action<TYPES.TRANSACTIONS_REQUEST> {}
 
-export interface TransactionsSuccessAction extends Action<TYPES.TRANSACTIONS_SUCCESS> {
+export interface TransactionsSuccessTableAction extends Action<TYPES.TRANSACTIONS_SUCCESS_TABLE> {
   payload: Data.Transactions
 }
 
-export type ActionTypes = TransactionsRequestAction | TransactionsSuccessAction
+export interface TransactionsSuccessChartAction extends Action<TYPES.TRANSACTIONS_SUCCESS_CHART> {
+  payload: Data.Transactions
+}
+
+export type ActionTypes =
+  | TransactionsRequestAction
+  | TransactionsSuccessTableAction
+  | TransactionsSuccessChartAction
 
 export const transactionsRequest: ActionCreator<TransactionsRequestAction> = () => ({
   type: TYPES.TRANSACTIONS_REQUEST
 })
 
-export const transactionsSuccess: ActionCreator<TransactionsSuccessAction> = (
+export const transactionsSuccessTable: ActionCreator<TransactionsSuccessTableAction> = (
   payload: Data.Transactions
 ) => ({
-  type: TYPES.TRANSACTIONS_SUCCESS,
+  type: TYPES.TRANSACTIONS_SUCCESS_TABLE,
+  payload
+})
+
+export const transactionsSuccessChart: ActionCreator<TransactionsSuccessChartAction> = (
+  payload: Data.Transactions
+) => ({
+  type: TYPES.TRANSACTIONS_SUCCESS_CHART,
   payload
 })
