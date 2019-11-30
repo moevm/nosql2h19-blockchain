@@ -19,11 +19,8 @@ from crypto_wallet_server.database import (
 
 class TransactionsViewSet(viewsets.ViewSet):
     permission_classes = (AllowAny,)
-
     def list(self, request):
         transactions = get_all_transactions()
-        # for i,transaction in enumerate(transactions):
-            # transactions[i]['sender'] = get_user(transaction['sender']).username
         return Response(data=transactions,status=status.HTTP_200_OK)
 
 
@@ -44,7 +41,7 @@ class TransactionsViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=['get'])
     def pivot_table3(self, request):
-        transactions = get_all_transactions(hidden=('_id', 'date', 'sender', 'receiver', 'user_id'))
+        transactions = get_all_transactions(hidden=('_id', 'date', 'sender_id', 'sender', 'receiver_id', 'receiver', 'user_id'))
         df = pd.DataFrame(transactions)
         df.columns = ['x', 'y']
         return Response(data=df,status=status.HTTP_200_OK)
