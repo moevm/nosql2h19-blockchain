@@ -18,7 +18,8 @@ function* fetchTransactionsChart() {
   try {
     const { data } = yield call(fetchAPI, { endpoint: ENDPOINT.TRANSACTIONS_CHART })
 
-    yield put(transactionsSuccess(data))
+    console.log(data)
+    // yield put(transactionsSuccess(data))
   } catch (error) {}
 }
 
