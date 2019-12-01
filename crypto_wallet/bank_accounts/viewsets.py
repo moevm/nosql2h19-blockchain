@@ -15,6 +15,7 @@ from crypto_wallet_server.database import (
     results_without_hidden,
 )
 
+import datetime
 
 class BankAccountViewSet(viewsets.ViewSet):
     permission_classes = (AllowAny,)
@@ -88,6 +89,16 @@ class BankAccountViewSet(viewsets.ViewSet):
                 topup[currency] = amount
                 sended[currency] = -amount
 
+                id = db.transactions.insert_one({
+                    'sender': get_bank_account({'user_id': encode_value(sender_id)})['keypair']['public_key'],
+                    'sender_id': encode_value(sender_id),
+                    'receiver': get_bank_account({'user_id': receiver['_id']})['keypair']['public_key'],
+                    'receiver_id': receiver['_id'],
+                    'currency': currency,
+                    'values': amount,
+                    'date': datetime.datetime.now().isoformat(),
+                }).inserted_id
+
             db.bank_accounts.update_one(
                 {'user_id': encode_value(sender_id)},
                 {'$inc': sended})
@@ -95,9 +106,8 @@ class BankAccountViewSet(viewsets.ViewSet):
             db.bank_accounts.update_one(
                 {'user_id': encode_value(receiver['_id'])},
                 {'$inc': topup})
-    
             return Response(status=status.HTTP_200_OK)
-    
+
         except:
             return Response(
                 data=msg('Check request data'),
@@ -119,7 +129,7 @@ class BankAccountViewSet(viewsets.ViewSet):
             db.bank_accounts.update_one(
                 {'user_id': encode_value(user_id)},
                 {'$inc': topup})
-            print(topup)
+
             return Response(status=status.HTTP_200_OK)
 
         return Response(
