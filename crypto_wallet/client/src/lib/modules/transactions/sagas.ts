@@ -1,8 +1,8 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, put, call, all } from 'redux-saga/effects'
 
 import fetchAPI from 'services/fetchAPI'
-import { ENDPOINT } from 'constants/api'
-import { transactionsSuccessTable, transactionsSuccessChart } from './actions'
+import { ENDPOINT, METHOD } from 'constants/api'
+import { transactionsSuccessTable, transactionsSuccessChart, ExportFileAction } from './actions'
 import TYPES from './types'
 
 function* fetchTransactionsTable() {
@@ -28,6 +28,21 @@ function* fetchTransactionsChart() {
   }
 }
 
+function* fetchExportFile(action: ExportFileAction) {
+  try {
+    const answer = call(fetchAPI, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      method: METHOD.POST,
+      body: action.payload
+    })
+  } catch (error) {
+    console.error(error.message)
+  }
+}
+
 export default function* watcher() {
-  yield takeLatest(TYPES.TRANSACTIONS_REQUEST, fetchTransactionsTable)
+  yield all([
+    takeLatest(TYPES.TRANSACTIONS_REQUEST, fetchTransactionsTable),
+    takeLatest(TYPES.EXPORT_FILE, fetchExportFile)
+  ])
 }

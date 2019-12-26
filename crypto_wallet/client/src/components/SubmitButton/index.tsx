@@ -7,16 +7,23 @@ import styles from './styles'
 
 interface OuterProps {
   className?: string
+  type?: 'submit'
   children: ReactNode
-  onSubmitButtonClick: () => void
+  onSubmitButtonClick?: () => void
 }
 
 interface Props extends OuterProps, JSSProps<typeof styles> {}
 
-const SubmitButton: FC<Props> = ({ classes, className, children, onSubmitButtonClick }) => (
+const SubmitButton: FC<Props> = ({
+  classes,
+  className,
+  children,
+  type = 'button',
+  onSubmitButtonClick
+}) => (
   <button
     className={cn(classes.button, className)}
-    type="button"
+    type={type}
     aria-label="button for sending form"
     onClick={onSubmitButtonClick}
   >

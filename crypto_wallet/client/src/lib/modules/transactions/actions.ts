@@ -11,10 +11,15 @@ export interface TransactionsSuccessChartAction extends Action<TYPES.TRANSACTION
   payload: Data.Transactions
 }
 
+export interface ExportFileAction extends Action<TYPES.EXPORT_FILE> {
+  payload: FormData
+}
+
 export type ActionTypes =
   | TransactionsRequestAction
   | TransactionsSuccessTableAction
   | TransactionsSuccessChartAction
+  | ExportFileAction
 
 export const transactionsRequest: ActionCreator<TransactionsRequestAction> = () => ({
   type: TYPES.TRANSACTIONS_REQUEST
@@ -31,5 +36,10 @@ export const transactionsSuccessChart: ActionCreator<TransactionsSuccessChartAct
   payload: Data.Transactions
 ) => ({
   type: TYPES.TRANSACTIONS_SUCCESS_CHART,
+  payload
+})
+
+export const exportFile: ActionCreator<ExportFileAction> = (payload: FormData) => ({
+  type: TYPES.EXPORT_FILE,
   payload
 })

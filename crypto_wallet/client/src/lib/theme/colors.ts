@@ -1,6 +1,31 @@
+import { BLACK, WHITE } from 'constants/styles'
+
 const colors = {
   text: '#FFFFFF',
   bg: '#fff',
+  uploadModal: {
+    color: BLACK,
+    bg: 'rgba(0, 0, 0, 0.5)',
+    wrapper: {
+      modal: {
+        bg: WHITE,
+        border: BLACK
+      },
+      helpColor: BLACK
+    },
+    fileList: {
+      textColor: BLACK
+    },
+    dropzone: {
+      container: {
+        bg: WHITE,
+        border: BLACK
+      },
+      containerActiveBg: '#fq329f',
+      titleColor: BLACK,
+      infoColor: BLACK
+    }
+  },
   components: {
     form: {
       bg: '#212121'
@@ -68,6 +93,14 @@ const colors = {
     table: {
       bg: 'rgba(255, 255, 255, 0.7)',
       border: '#212121'
+    },
+    buttons: {
+      color: BLACK,
+      bg: WHITE,
+      hover: {
+        color: WHITE,
+        bg: BLACK
+      }
     }
   }
 }

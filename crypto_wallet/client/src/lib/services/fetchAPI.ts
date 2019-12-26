@@ -3,6 +3,7 @@ import axios from 'axios'
 import { API_URL, METHOD } from 'constants/api'
 
 interface FetchOptions {
+  headers?: any
   otherUrl?: string
   version?: string
   endpoint?: string
@@ -13,6 +14,7 @@ interface FetchOptions {
 }
 
 function fetchAPI<T extends {}>({
+  headers,
   otherUrl = '',
   version = 'v0',
   endpoint = '',
@@ -27,11 +29,11 @@ function fetchAPI<T extends {}>({
     console.log('API CALL', method.toUpperCase(), url, body)
   }
 
-  const headers = token ? { authorization: `Bearer ${token}` } : ''
+  const reqHeaders = token ? { authorization: `Bearer ${token}`, ...headers } : { ...headers }
 
   return axios.request<T>({
     url,
-    headers,
+    headers: reqHeaders,
     method,
     data: body
   })

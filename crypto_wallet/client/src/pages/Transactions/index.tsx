@@ -7,6 +7,7 @@ import compose from 'lib/utils/compose'
 import { transactionsRequest } from 'lib/modules/transactions/actions'
 import Table from './components/Table'
 import Chart from './components/Chart'
+import Buttons from './components/Buttons'
 import styles from './styles'
 
 interface OuterProps {
@@ -29,6 +30,7 @@ const Transactions: FC<Props> = ({ classes, requestTransactions }) => {
       <h1 className={classes.title}>Statistics</h1>
       <Table />
       <Chart />
+      <Buttons />
     </section>
   )
 }
