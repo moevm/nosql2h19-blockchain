@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 
+from django.conf import settings
 from crypto_wallet_server.database import (
     db,
     to_mongo,
@@ -16,6 +17,18 @@ from crypto_wallet_server.database import (
     get_transactions,
     get_all_transactions,
 )
+
+import os
+
+
+def handle_uploaded_file(f, filename):
+    path = os.path.join(settings.BASE_DIR, f"database/export/{filename}")
+    with open(path, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+        f.close()
+    return path
+
 
 class TransactionsViewSet(viewsets.ViewSet):
     permission_classes = (AllowAny,)
@@ -45,3 +58,20 @@ class TransactionsViewSet(viewsets.ViewSet):
         df = pd.DataFrame(transactions, columns=['currency', 'values'])
         df.columns = ['x', 'y']
         return Response(data=df,status=status.HTTP_200_OK)
+
+
+    @action(detail=False, methods=['get'])
+    def import_db(self, request):
+        path = handle_uploaded_file(request.FILES['file'], request.FILES['filename'])
+        cmd = f"mongoimport --host blockchain-shard-00-01-60374.gcp.mongodb.net:27017 --db test_wallet --collection={collection} --type json --file {path} --jsonArray --authenticationDatabase admin --ssl --username common_user --password 8FUQRfAaxp7Pgbvw"
+        os.system(cmd)
+        return Response(status=status.HTTP_200_OK)
+
+
+    @action(detail=False, methods=['get'])
+    def export_db(self, request):
+        for collection in db.list_collection_names():
+            path = os.path.join(settings.BASE_DIR, f"database/export/{collection}.json")
+            cmd = f"mongoexport --host blockchain-shard-00-01-60374.gcp.mongodb.net:27017 --db wallet --collection={collection} --type json --out={path} --jsonArray --authenticationDatabase admin --ssl --username common_user --password 8FUQRfAaxp7Pgbvw --forceTableScan"
+            os.system(cmd)
+        return Response(status=status.HTTP_200_OK)
