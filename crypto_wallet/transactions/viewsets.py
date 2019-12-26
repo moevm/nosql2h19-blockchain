@@ -67,7 +67,7 @@ class TransactionsViewSet(viewsets.ViewSet):
         return Response(data=df,status=status.HTTP_200_OK)
 
 
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=['put'])
     def import_db(self, request):
         filename = request.FILES['filename']
         path = handle_uploaded_file(request.FILES['file'], filename)
