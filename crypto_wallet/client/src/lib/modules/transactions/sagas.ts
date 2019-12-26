@@ -30,7 +30,7 @@ function* fetchTransactionsChart() {
 
 function* fetchExportFile(action: ExportFileAction) {
   try {
-    const answer = call(fetchAPI, {
+    const answer = yield call(fetchAPI, {
       headers: { 'Content-Type': 'multipart/form-data' },
       endpoint: '/transactions/import_db',
       method: METHOD.POST,
