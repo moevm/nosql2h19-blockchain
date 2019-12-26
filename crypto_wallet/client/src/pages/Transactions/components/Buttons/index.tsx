@@ -27,7 +27,7 @@ const Buttons: FC<Props> = ({ classes, className }) => {
       </button>
       <a
         className={classes.link}
-        href="/api/v0/transactions/import_db"
+        href="/api/v0/transactions/export_db"
         target="blank"
         rel="norefferer nofollow"
         aria-label="link for export"
