@@ -18,8 +18,11 @@ secret.txt
 
 .DS_Store 
 
-# Client 
+# Client
 !crypto_wallet/client/
 crypto_wallet/client/*
 !crypto_wallet/client/public/
 !crypto_wallet/client/src
+
+# Backend export/import data
+crypto_wallet/database
