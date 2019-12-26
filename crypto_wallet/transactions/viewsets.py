@@ -67,10 +67,11 @@ class TransactionsViewSet(viewsets.ViewSet):
         return Response(data=df,status=status.HTTP_200_OK)
 
 
-    @action(detail=False, methods=['put'])
+    @action(detail=False, methods=['post'])
     def import_db(self, request):
-        filename = request.FILES['filename']
-        path = handle_uploaded_file(request.FILES['file'], filename)
+        filedata = request.FILES['file']
+        filename = str(filedata)
+        path = handle_uploaded_file(filedata, filename)
         collection = filename.split('.json')[0]
         cmd = f"mongoimport --host blockchain-shard-00-01-60374.gcp.mongodb.net:27017 --db test_wallet --collection={collection} --type json --file {path} --jsonArray --authenticationDatabase admin --ssl --username common_user --password 8FUQRfAaxp7Pgbvw"
         os.system(cmd)
