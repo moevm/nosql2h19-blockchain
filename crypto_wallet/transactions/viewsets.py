@@ -21,8 +21,15 @@ from crypto_wallet_server.database import (
 import os
 
 
+IMPORT_PATH = os.path.join(settings.BASE_DIR, "database/import")
+EXPORT_PATH = os.path.join(settings.BASE_DIR, "database/export")
+
+os.makedirs(IMPORT_PATH, exist_ok=True)
+os.makedirs(EXPORT_PATH, exist_ok=True)
+
+
 def handle_uploaded_file(f, filename):
-    path = os.path.join(settings.BASE_DIR, f"database/import/{filename}")
+    path = os.path.join(IMPORT_PATH, filename)
     with open(path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
@@ -73,7 +80,7 @@ class TransactionsViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['get'])
     def export_db(self, request):
         for collection in db.list_collection_names():
-            path = os.path.join(settings.BASE_DIR, f"database/export/{collection}.json")
+            path = os.path.join(EXPORT_PATH, f"{collection}.json")
             cmd = f"mongoexport --host blockchain-shard-00-01-60374.gcp.mongodb.net:27017 --db wallet --collection={collection} --type json --out={path} --jsonArray --authenticationDatabase admin --ssl --username common_user --password 8FUQRfAaxp7Pgbvw --forceTableScan"
             os.system(cmd)
         return Response(status=status.HTTP_200_OK)
