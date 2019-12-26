@@ -39,7 +39,7 @@ const PortfolioUpload: FC<Props> = ({ className, sendFile, ...props }) => {
 
     if (document.length) {
       const formData = new FormData()
-      formData.append('data[export]', document[0])
+      formData.append('file', document[0])
 
       sendFile(formData)
       props.onCloseClick()
