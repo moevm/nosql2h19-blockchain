@@ -63,8 +63,7 @@ const styles = (theme: App.Theme) => ({
   },
   submitButton: {
     height: 40,
-    marginTop: 15,
-    padding: '0 35px'
+    marginTop: 15
   },
   closeButton: {
     position: 'absolute',

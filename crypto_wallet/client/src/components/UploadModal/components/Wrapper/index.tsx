@@ -37,7 +37,9 @@ const Wrapper: FC<Props> = ({
         <p className={classes.help}>
           {text ? text : `Размер загружаемого файла не должен превышать 10мб.`}
         </p>
-        <SubmitButton className={classes.submitButton}>Загрузить</SubmitButton>
+        <SubmitButton className={classes.submitButton} type="submit">
+          Загрузить
+        </SubmitButton>
       </form>
       <button
         className={classes.closeButton}
