@@ -22,7 +22,7 @@ import os
 
 
 def handle_uploaded_file(f, filename):
-    path = os.path.join(settings.BASE_DIR, f"database/export/{filename}")
+    path = os.path.join(settings.BASE_DIR, f"database/import/{filename}")
     with open(path, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
