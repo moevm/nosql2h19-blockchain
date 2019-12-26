@@ -20,19 +20,19 @@ const Buttons: FC<Props> = ({ classes, className }) => {
       <button
         className={classes.button}
         type="button"
-        aria-label="button for export"
+        aria-label="button for import"
         onClick={() => setModal(true)}
       >
-        Export
+        Import
       </button>
       <a
         className={classes.link}
         href="/api/v0/transactions/import_db"
         target="blank"
         rel="norefferer nofollow"
-        aria-label="link for import"
+        aria-label="link for export"
       >
-        Import
+        Export
       </a>
 
       <UploadModal

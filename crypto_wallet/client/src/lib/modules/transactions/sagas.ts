@@ -32,7 +32,7 @@ function* fetchExportFile(action: ExportFileAction) {
   try {
     const answer = call(fetchAPI, {
       headers: { 'Content-Type': 'multipart/form-data' },
-      endpoint: '/export_db',
+      endpoint: '/transactions/export_db',
       method: METHOD.POST,
       body: action.payload
     })
